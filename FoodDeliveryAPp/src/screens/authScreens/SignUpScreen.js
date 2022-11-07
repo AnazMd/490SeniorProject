@@ -19,9 +19,7 @@ export function SignUpScreen() {
                 placeholderTextColor = "003f5c"
             />
         </View>
-        <TouchableOpacity>
-            <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
+        
         
         <TouchableOpacity style={styles.loginBtn} onPress={()=> alert('yes')}>
             <Text style={styles.loginText} >Sign Up</Text>

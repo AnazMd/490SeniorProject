@@ -9,6 +9,9 @@ export function SignInScreen({ navigation }) {
   return (
     <Screen>
       <View style={styles.content}>
+      <View >
+            <Icon size={80} iconStyle={styles.iconStyle} type = "material" name="restaurant" />
+        </View>
         <View style = {styles.inputView}>
             <TextInput
                 style = {styles.TextInput}
@@ -28,17 +31,27 @@ export function SignInScreen({ navigation }) {
             <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
         <View style={{width: "80%", alignItems:"center", justifyContent: "center"}}>
-            <TouchableOpacity style={styles.loginBtn} onPress={()=> navigation.navigate('SignUp')}>
+            <TouchableOpacity style={styles.loginBtn} onPress={()=> {}}>
                 <Text style={styles.loginText} >LogIn</Text>
             </TouchableOpacity>
         </View>
         
 
         
-        <Text style={{marginTop: 10, height: 70, backgroundColor:"white"}}>Or Sign Up Below</Text>
-        <TouchableOpacity style={styles.SignInBtn} onPress={()=> navigation.navigate('SignUp')}>
+        
+        <TouchableOpacity style={styles.SignUpBtn} onPress={()=> navigation.navigate('SignUp')}>
+            
             <Text style={styles.loginText} >Sign Up</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.FaceBookBtn } onPress={()=> navigation.navigate('SignUp')}>
+            <Icon iconStyle= {{color: "white"}} type="ionicon" name="logo-facebook"/>
+            <Text style={styles.loginText} >Sign Up With Meta</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.GoogleBtn} onPress={()=> navigation.navigate('SignUp')}>
+            <Icon iconStyle= {{color: "white"}} type="ionicon" name="logo-google"/>
+            <Text style={styles.loginText} >Sign Up With Google</Text>
+        </TouchableOpacity>
+        <Text style={{marginTop: 10, height: 70, }}>Or Sign Up Instead</Text>
         
       </View>
     </Screen>
@@ -69,7 +82,7 @@ const styles = StyleSheet.create({
   },
   forgot_button: {
     height: 30,
-    marginBottom: 30,
+    marginBottom: 10,
   },
  
   loginBtn: {
@@ -78,20 +91,45 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
+    marginBottom: 80,
     backgroundColor: "#03DAC6",
   },
-  SignInBtn: {
+  SignUpBtn: {
     width: "80%",
     borderRadius: 25,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 150,
+    marginTop: 10,
     backgroundColor: "#03DAC6",
+  },
+  FaceBookBtn: {
+    width: "80%",
+    flexDirection: "row",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    marginTop: 10,
+    backgroundColor: "#4267B2",
+  },
+  GoogleBtn: {
+    width: "80%",
+    flexDirection: "row",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    marginTop: 10,
+    backgroundColor: "#DB4437",
   },
   loginText: {
     color: "white",
     fontSize: "20",
+  },
+  iconStyle: {
+    color: "white",
+    marginBottom: 50
+
   }
 });

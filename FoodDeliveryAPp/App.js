@@ -19,7 +19,7 @@ function App() {
           name={SCREEN_NAMES.SignIn}
           component={SignInScreen}
           options={{
-            title: "Sign In",
+            title: "Sign In To Plan Your Meals Today",
           }}
         />
         <Stack.Screen
