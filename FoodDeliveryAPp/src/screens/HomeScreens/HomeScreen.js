@@ -5,7 +5,7 @@ import { Icon } from "react-native-elements/dist/icons/Icon";
 import { SCREEN_NAMES } from "../../constants/navigation";
 import { Screen } from "../../components/layout/Screen";
 
-export function RecipesScreen() {
+export function HomeScreen() {
     return (
         <Text>Hello</Text>
     )

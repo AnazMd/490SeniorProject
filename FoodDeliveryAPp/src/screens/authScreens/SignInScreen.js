@@ -31,7 +31,7 @@ export function SignInScreen({ navigation }) {
             <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
         <View style={{width: "80%", alignItems:"center", justifyContent: "center"}}>
-            <TouchableOpacity style={styles.loginBtn} onPress={()=> {}}>
+            <TouchableOpacity style={styles.loginBtn} onPress={()=> navigation.navigate('Home')}>
                 <Text style={styles.loginText} >LogIn</Text>
             </TouchableOpacity>
         </View>

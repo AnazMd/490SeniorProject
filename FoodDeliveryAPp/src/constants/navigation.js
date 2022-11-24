@@ -4,5 +4,6 @@ export const SCREEN_NAMES = {
   Profile: "Profile",
   Recipes: "Recipes",
   MyMeals: "MyMeals",
+  Home: "Home",
   Ingredients: "Ingredients",
 };
