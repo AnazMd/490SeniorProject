@@ -7,9 +7,10 @@ import { Screen } from "../../components/layout/Screen";
 
 export function MyMealsScreen({navigation}) {
     return (
-        <TouchableOpacity onPress={()=> navigation.navigate('SignIn')}>
-            <Text>Hello</Text>
-        </TouchableOpacity>
-        
+        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+            <TouchableOpacity onPress={()=> navigation.navigate('SignIn')}>
+                <Text>MyMeals</Text>
+            </TouchableOpacity>
+        </View>
     )
 }

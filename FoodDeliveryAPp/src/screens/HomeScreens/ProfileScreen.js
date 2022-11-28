@@ -7,8 +7,10 @@ import { Screen } from "../../components/layout/Screen";
 
 export function ProfileScreen(){
     return (
-        <Screen>
-            <Text>Hello</Text>
-        </Screen>
+        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+            <TouchableOpacity >
+                <Text>Profile</Text>
+            </TouchableOpacity>
+        </View>
     )
 }

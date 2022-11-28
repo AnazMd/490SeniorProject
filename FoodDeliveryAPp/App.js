@@ -20,11 +20,27 @@ const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
+function bestDrawer({navigation}) {
+  return (
+    <View>
+      <Text onPress={() => navigation.navigate('SignIn')}>Logout</Text>
+    </View>
+  )
+}
+
+function ProfileDrawer() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name='Test Drawer' component={ProfileScreen} />
+    </Drawer.Navigator>
+  )
+}
+
 function Home() {
   return (
-    <Tabs.Navigator>
+    <Tabs.Navigator screenOptions={{headerShown: false}}>
         <Tabs.Screen name={SCREEN_NAMES.MyMeals} component={MyMealsScreen}/>
-        <Tabs.Screen name={SCREEN_NAMES.Profile} component={ProfileScreen}/>
+        <Tabs.Screen name={SCREEN_NAMES.Profile} component={ProfileDrawer}/>
         <Tabs.Screen name={SCREEN_NAMES.Recipes} component={RecipesScreen}/>
         <Tabs.Screen name={SCREEN_NAMES.Ingredients} component={IngredientsScreen}/>
       </Tabs.Navigator>
@@ -33,9 +49,7 @@ function Home() {
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{
-    headerShown: false
-  }}>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Group screenOptions={{headerStyle: {backgroundColor: "#018786"}}}>
         <Stack.Screen
           name={SCREEN_NAMES.SignIn}

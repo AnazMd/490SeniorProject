@@ -7,6 +7,10 @@ import { Screen } from "../../components/layout/Screen";
 
 export function RecipesScreen() {
     return (
-        <Text>Hello</Text>
+        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+            <TouchableOpacity>
+                <Text>Recipes</Text>
+            </TouchableOpacity>
+        </View>
     )
 }
