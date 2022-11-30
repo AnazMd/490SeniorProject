@@ -49,8 +49,7 @@ function Home() {
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Group screenOptions={{headerStyle: {backgroundColor: "#018786"}}}>
+      <Stack.Navigator screenOptions={{headerShown: false, headerStyle:{backgroundColor:"#018786"}}}>
         <Stack.Screen
           name={SCREEN_NAMES.SignIn}
           component={SignInScreen}
@@ -58,7 +57,6 @@ function App() {
             title: "Sign In To Plan Your Meals Today",
           }}
         />
-        
         <Stack.Screen
           name={SCREEN_NAMES.SignUp}
           component={SignUpScreen}
@@ -73,7 +71,6 @@ function App() {
             title: "Sign In To Plan Your Meals Today",
           }}
         />
-        </Stack.Group>
         
       </Stack.Navigator>
     </NavigationContainer>
@@ -81,3 +78,29 @@ function App() {
 }
 
 export default App;
+
+// if (state.isLoading) {
+//   // We haven't finished checking for the token yet
+//   return <SplashScreen />;
+// }
+
+// return (
+//   <Stack.Navigator>
+//     {state.userToken == null ? (
+//       // No token found, user isn't signed in
+//       <Stack.Screen
+//         name="SignIn"
+//         component={SignInScreen}
+//         options={{
+//           title: 'Sign in',
+//           // When logging out, a pop animation feels intuitive
+//           // You can remove this if you want the default 'push' animation
+//           animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+//         }}
+//       />
+//     ) : (
+//       // User is signed in
+//       <Stack.Screen name="Home" component={HomeScreen} />
+//     )}
+//   </Stack.Navigator>
+// );
