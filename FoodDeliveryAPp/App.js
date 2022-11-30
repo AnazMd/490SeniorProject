@@ -40,7 +40,7 @@ function Home() {
   return (
     <Tabs.Navigator screenOptions={{headerShown: false}}>
         <Tabs.Screen name={SCREEN_NAMES.MyMeals} component={MyMealsScreen}/>
-        <Tabs.Screen name={SCREEN_NAMES.Profile} component={ProfileDrawer}/>
+        <Tabs.Screen name={SCREEN_NAMES.Profile} component={ProfileScreen}/>
         <Tabs.Screen name={SCREEN_NAMES.Recipes} component={RecipesScreen}/>
         <Tabs.Screen name={SCREEN_NAMES.Ingredients} component={IngredientsScreen}/>
       </Tabs.Navigator>
