@@ -10,10 +10,27 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SCREEN_NAMES } from "./src/constants/navigation";
 import { useState } from "react";
 const Stack = createNativeStackNavigator();
-const HomeStack = () => {
-  return (
+
+
+function App() {
+  return (  
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false, headerStyle:{backgroundColor:"#018786"}}}>
+        <Stack.Screen
+          name={SCREEN_NAMES.SignIn}
+          component={SignInScreen}
+          options={{
+            title: "Sign In To Plan Your Meals Today",
+          }}
+          
+        />
+        <Stack.Screen
+          name={SCREEN_NAMES.SignUp}
+          component={SignUpScreen}
+          options={{
+            title: "Sign Up",
+          }}
+        />
         <Stack.Screen
             name={SCREEN_NAMES.Home}
             component={HomeScreen}
@@ -24,42 +41,6 @@ const HomeStack = () => {
       </Stack.Navigator>
     </NavigationContainer>
   )
-}
-
-const AuthStack = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false, headerStyle:{backgroundColor:"#018786"}}}>
-        <Stack.Screen
-          name={SCREEN_NAMES.SignIn}
-          component={SignInScreen}
-          options={{
-            title: "Sign In To Plan Your Meals Today",
-          }}
-        />
-        <Stack.Screen
-          name={SCREEN_NAMES.SignUp}
-          component={SignUpScreen}
-          options={{
-            title: "Sign Up",
-          }}
-        />
-        
-      </Stack.Navigator>
-      
-    </NavigationContainer>
-  )
-}
-function App() {
-  const [isSignedIn, setIsSignedIn] = useState(false)
-  if (isSignedIn) {
-    return (
-      <HomeStack/>
-    )
-  }
-  return (
-    <AuthStack/>
-  );
 }
 
 export default App;
