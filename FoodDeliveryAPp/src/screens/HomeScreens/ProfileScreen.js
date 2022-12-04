@@ -24,14 +24,21 @@ export function ProfileScreen({navigation}){
     }
     return (
         <Screen>
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{flex: 1, alignItems: 'center', marginTop: 50}}> 
+                <View style={styles.CircleShape} /> 
+                <Text style={styles.circleText}> Profile Pic </Text>
+            </View> 
 
-            <Text> Testing Text </Text>
+
+
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                
+            
 
             
                 <Button title="Logout" color="red" onPress={handleSignOut}></Button>
             </View>
-        
+
             
             {/* <SafeAreaView style={styles.content}>
                 <ScrollView 
@@ -79,5 +86,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'gray',
-    }
+    },
+    circleText: {
+        fontSize: 20,
+        textAlign: "center",
+        margin: 10,
+        fontWeight: "bold"
+      }, 
+      CircleShape: {
+        width: 100,
+        height: 100,
+        borderRadius: 90 / 2,
+        backgroundColor: '#BEBEBE',
+      },
 })
