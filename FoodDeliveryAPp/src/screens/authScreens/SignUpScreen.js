@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, TextInput, TouchableOpacity } from "react-nativ
 import { auth } from "../../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-export function SignUpScreen() {
+export function SignUpScreen({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSignUp = () => {
@@ -19,6 +19,7 @@ export function SignUpScreen() {
         const errorMessage = error.message;
         // ..
       });
+      navigation.navigate('FormFillIn')
   }
   return (
     <Screen>
@@ -53,7 +54,7 @@ export function SignUpScreen() {
 const styles = StyleSheet.create({
     content: {
       flex: 1,
-      backgroundColor: "#018786",
+      backgroundColor: "#fff",
       justifyContent: "center",
       alignItems: "center",
     },
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
     inputView: {
       backgroundColor: "white",
       borderRadius: 30,
+      borderWidth: 1,
       width: "70%",
       height: 45,
       marginBottom: 20,
@@ -81,10 +83,11 @@ const styles = StyleSheet.create({
       width: "80%",
       borderRadius: 25,
       height: 50,
+      borderWidth: 1,
       alignItems: "center",
       justifyContent: "center",
       marginTop: 40,
-      backgroundColor: "#03DAC6",
+      backgroundColor: "lightgray",
     },
     loginText: {
       color: "white",

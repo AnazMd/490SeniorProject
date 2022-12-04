@@ -122,11 +122,12 @@ const styles = StyleSheet.create({
   SignUpBtn: {
     width: "80%",
     borderRadius: 25,
+    borderWidth: 1,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
-    backgroundColor: "#03DAC6",
+    backgroundColor: "lightgray",
   },
   FaceBookBtn: {
     width: "80%",

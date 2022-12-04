@@ -9,6 +9,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SCREEN_NAMES } from "./src/constants/navigation";
 import { useState } from "react";
+import { FormFillInScreen } from "./src/screens/authScreens/FormFillInScreen";
 const Stack = createNativeStackNavigator();
 
 
@@ -32,11 +33,14 @@ function App() {
           }}
         />
         <Stack.Screen
+            name={SCREEN_NAMES.FormFillIn}
+            component={FormFillInScreen}
+            
+          />
+        <Stack.Screen
             name={SCREEN_NAMES.Home}
             component={HomeScreen}
-            options={{
-              title: "Sign In To Plan Your Meals Today",
-            }}
+            
           />
       </Stack.Navigator>
     </NavigationContainer>
