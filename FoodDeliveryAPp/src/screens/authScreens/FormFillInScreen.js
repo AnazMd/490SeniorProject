@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, ScrollView, StatusBar, TextInput, TouchableOpacity, View} from 'react-native';
 import { Formik } from 'formik';
 import { RadioButton } from '../../components/RadioButton';
+import { getDatabase, ref, set } from "firebase/database";
 
-export function FormFillInScreen({navigation}) {
+export function FormFillInScreen({navigation, route}) {
+    const { userid } = route.params
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
     const [height, setHeight] = useState('')
@@ -11,9 +13,31 @@ export function FormFillInScreen({navigation}) {
     const [inches, setInches] = useState('')
     const [weight, setWeight] = useState('')
     const [exerciseLevel, setExerciseLevel] = useState('')
+    const [goal, setGoal] = useState('')
     const handleSubmit = () => {
-        setHeight(feet + ' ' + inches)
+        let user = {
+            user_name: name,
+            user_age: age,
+            user_height: height,
+            user_weight: weight,
+            user_eLvl: exerciseLevel,
+            user_goal: goal,
+            user_id: userid
+        }
+        writeUserData(user)
+        navigation.navigate('Home')
     }
+    function writeUserData(user) {
+        const db = getDatabase();
+        set(ref(db, 'users/' + user.user_id), {
+            username: user.user_name,
+            user_age: user.user_age,
+            user_height: user.user_height,
+            user_weight: user.user_weight,
+            user_eLvl: user.user_eLvl,
+            user_goal: user.user_goal,
+        });
+      }
 
     return(
         <SafeAreaView >
@@ -44,13 +68,13 @@ export function FormFillInScreen({navigation}) {
                     <View style={styles.inputWrapper}>
                         <Text style={styles.label}>Height:</Text>
                         <TextInput
-                        placeholder="Feet"
+                        placeholder="Height (Ft In)"
                         placeholderTextColor = "003f5c"
-                        value = {feet}
-                        onChangeText={text => setFeet(text)}
+                        value = {height}
+                        onChangeText={text => setHeight(text)}
                         style={styles.textInput}
                         />
-                        <Text>ft</Text>
+                        {/* <Text>ft</Text>
                         <TextInput
                         placeholder="Inches"
                         placeholderTextColor = "003f5c"
@@ -58,7 +82,7 @@ export function FormFillInScreen({navigation}) {
                         onChangeText={text => setInches(text)}
                         style={styles.textInput}
                         />
-                        <Text>in</Text>
+                        <Text>in</Text> */}
                     </View>
                     <View style={styles.inputWrapper}>
                         <Text style={styles.label}>Weight:</Text>
@@ -76,8 +100,8 @@ export function FormFillInScreen({navigation}) {
                 </View>
 
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                    <RadioButton header={'What is your current goal?'} labels={['Bulk', 'Maintain', 'Cut']}/>
-                    <RadioButton header={'What is your current exercise level?'} labels={['1-2 times a week','3-4 times a week', '5-6 times a week']}/>
+                    <RadioButton val={goal} changeVal={setGoal} header={'What is your current goal?'} labels={['Bulk', 'Maintain', 'Cut']}/>
+                    <RadioButton val={exerciseLevel} changeVal={setExerciseLevel} header={'What is your current exercise level?'} labels={['1-2 times a week','3-4 times a week', '5-6 times a week']}/>
                     <TouchableOpacity style={styles.submitBtn} onPress={handleSubmit}>
                         <Text>Submit</Text>
                     </TouchableOpacity>

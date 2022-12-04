@@ -12,6 +12,10 @@ export function SignUpScreen({navigation}) {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
+        navigation.navigate('FormFillIn', {
+          userid: user.uid
+        })
+        console.log("uid: ", user.uid)
         // ...
       })
       .catch((error) => {
@@ -19,7 +23,7 @@ export function SignUpScreen({navigation}) {
         const errorMessage = error.message;
         // ..
       });
-      navigation.navigate('FormFillIn')
+      
   }
   return (
     <Screen>

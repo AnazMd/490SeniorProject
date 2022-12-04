@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity, StatusBar } from 'react-native'
 import React, {useState} from 'react'
 
-export const RadioButton = ({header, labels}) => {
-const [goal, setGoal] = useState('')
+export const RadioButton = ({header, labels, changeVal, val}) => {
+
   return (
     <View style={styles.container}>
         <Text style={styles.header}>{header}</Text>
@@ -11,10 +11,10 @@ const [goal, setGoal] = useState('')
                 <View key={goals} style={styles.mood}>
                     <Text>{goals}</Text>
                     <TouchableOpacity
-                        onPress={() => setGoal(goals)}
+                        onPress={() => changeVal(goals)}
                         style={styles.outer}
                     >
-                        { goal === goals && <View style={styles.inner}/>}
+                        { val === goals && <View style={styles.inner}/>}
                     </TouchableOpacity>
                 </View>
             ))}
