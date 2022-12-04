@@ -5,48 +5,28 @@ import { SafeAreaView } from "react-native";
 import { SignInScreen } from "./src/screens/authScreens/SignInScreen";
 import { SignUpScreen } from "./src/screens/authScreens/SignUpScreen";
 import { HomeScreen } from "./src/screens/HomeScreens/HomeScreen";
-import { ProfileScreen } from "./src/screens/HomeScreens/ProfileScreen";
-import { IngredientsScreen } from "./src/screens/HomeScreens/IngredientsScreen";
-import { MyMealsScreen } from "./src/screens/HomeScreens/MyMealsScreen";
-import { RecipesScreen } from "./src/screens/HomeScreens/RecipesScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SCREEN_NAMES } from "./src/constants/navigation";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-
-
+import { useState } from "react";
 const Stack = createNativeStackNavigator();
-const Tabs = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
-
-function bestDrawer({navigation}) {
+const HomeStack = () => {
   return (
-    <View>
-      <Text onPress={() => navigation.navigate('SignIn')}>Logout</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+            name={SCREEN_NAMES.Home}
+            component={HomeScreen}
+            options={{
+              title: "Sign In To Plan Your Meals Today",
+            }}
+          />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 
-function ProfileDrawer() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name='Test Drawer' component={ProfileScreen} />
-    </Drawer.Navigator>
-  )
-}
-
-function Home() {
-  return (
-    <Tabs.Navigator screenOptions={{headerShown: false}}>
-        <Tabs.Screen name={SCREEN_NAMES.MyMeals} component={MyMealsScreen}/>
-        <Tabs.Screen name={SCREEN_NAMES.Profile} component={ProfileScreen}/>
-        <Tabs.Screen name={SCREEN_NAMES.Recipes} component={RecipesScreen}/>
-        <Tabs.Screen name={SCREEN_NAMES.Ingredients} component={IngredientsScreen}/>
-      </Tabs.Navigator>
-  );
-}
-function App() {
+const AuthStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false, headerStyle:{backgroundColor:"#018786"}}}>
@@ -64,16 +44,21 @@ function App() {
             title: "Sign Up",
           }}
         />
-        <Stack.Screen
-          name={SCREEN_NAMES.Home}
-          component={Home}
-          options={{
-            title: "Sign In To Plan Your Meals Today",
-          }}
-        />
         
       </Stack.Navigator>
+      
     </NavigationContainer>
+  )
+}
+function App() {
+  const [isSignedIn, setIsSignedIn] = useState(false)
+  if (isSignedIn) {
+    return (
+      <HomeStack/>
+    )
+  }
+  return (
+    <AuthStack/>
   );
 }
 

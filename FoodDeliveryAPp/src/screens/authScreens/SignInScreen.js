@@ -1,15 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Dimensions, Button, TextInput, TouchableOpacity } from "react-native";
 import { colors, parameters, title } from "../../constants/styles";
 import { Icon } from "react-native-elements/dist/icons/Icon";
-import { SCREEN_NAMES } from "../../constants/navigation";
 import { Screen } from "../../components/layout/Screen";
+import { auth } from "../../../firebase";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
-export function SignInScreen({ navigation }) {
+export function SignInScreen({ navigation}) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      if (user) {
+        navigation.navigate('Home')
+      }
+    })
+    return unsubscribe;
+  }, [])
+  const handleLogIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  }
+
   return (
     <Screen>
       <View style={styles.content}>
-      <View >
+        <View >
             <Icon size={80} iconStyle={styles.iconStyle} type = "material" name="restaurant" />
         </View>
         <View style = {styles.inputView}>
@@ -17,30 +42,29 @@ export function SignInScreen({ navigation }) {
                 style = {styles.TextInput}
                 placeholder="Enter Your Email"
                 placeholderTextColor = "003f5c"
+                value = {email}
+                onChangeText={text => setEmail(text)}
             />
         </View>
         <View style = {styles.inputView}>
-            
             <TextInput
                 style = {styles.TextInput}
                 placeholder="Enter Your Password"
                 placeholderTextColor = "003f5c"
+                value = {password}
+                onChangeText={text => setPassword(text)}
+                secureTextEntry
             />
         </View>
         <TouchableOpacity>
             <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
         <View style={{width: "80%", alignItems:"center", justifyContent: "center"}}>
-            <TouchableOpacity style={styles.loginBtn} onPress={()=> navigation.navigate('Home')}>
+            <TouchableOpacity style={styles.loginBtn} onPress={handleLogIn}>
                 <Text style={styles.loginText} >LogIn</Text>
             </TouchableOpacity>
         </View>
-        
-
-        
-        
         <TouchableOpacity style={styles.SignUpBtn} onPress={()=> navigation.navigate('SignUp')}>
-            
             <Text style={styles.loginText} >Sign Up</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.FaceBookBtn } onPress={()=> navigation.navigate('SignUp')}>
@@ -61,7 +85,7 @@ export function SignInScreen({ navigation }) {
 const styles = StyleSheet.create({
   content: {
     flex: 1,
-    backgroundColor: "#018786",
+    backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -75,6 +99,7 @@ const styles = StyleSheet.create({
   inputView: {
     backgroundColor: "white",
     borderRadius: 30,
+    borderWidth: 1,
     width: "70%",
     height: 45,
     marginBottom: 20,
@@ -87,11 +112,12 @@ const styles = StyleSheet.create({
   loginBtn: {
     width: "80%",
     borderRadius: 25,
+    borderWidth: 1,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 80,
-    backgroundColor: "#03DAC6",
+    backgroundColor: "lightgray",
   },
   SignUpBtn: {
     width: "80%",
@@ -127,7 +153,7 @@ const styles = StyleSheet.create({
     fontSize: "20",
   },
   iconStyle: {
-    color: "white",
+    color: "gray",
     marginBottom: 50
 
   }

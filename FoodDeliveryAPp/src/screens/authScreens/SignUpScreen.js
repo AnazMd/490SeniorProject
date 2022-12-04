@@ -1,7 +1,25 @@
+import React, { useState } from "react";
 import { Screen } from "../../components/layout/Screen";
 import { Text, View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { auth } from "../../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export function SignUpScreen() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleSignUp = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  }
   return (
     <Screen>
         <View style={styles.content}>
@@ -10,6 +28,8 @@ export function SignUpScreen() {
                 style = {styles.TextInput}
                 placeholder="Enter Your Email"
                 placeholderTextColor = "003f5c"
+                value = {email}
+                onChangeText={text => setEmail(text)}
             />
         </View>
         <View style = {styles.inputView}>
@@ -17,12 +37,13 @@ export function SignUpScreen() {
                 style = {styles.TextInput}
                 placeholder="Enter Your Password"
                 placeholderTextColor = "003f5c"
+                value = {password}
+                onChangeText={text => setPassword(text)}
+                secureTextEntry
             />
         </View>
-        
-        
-        <TouchableOpacity style={styles.loginBtn} onPress={()=> alert('yes')}>
-            <Text style={styles.loginText} >Sign Up</Text>
+        <TouchableOpacity style={styles.loginBtn} onPress={handleSignUp}>
+            <Text style={styles.loginText}>Sign Up</Text>
         </TouchableOpacity>
       </View>
     </Screen>
