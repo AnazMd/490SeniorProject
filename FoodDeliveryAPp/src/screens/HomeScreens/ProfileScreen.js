@@ -25,8 +25,13 @@ export function ProfileScreen({navigation}){
     return (
         <Screen>
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+
+            <Text> Testing Text </Text>
+
+            
                 <Button title="Logout" color="red" onPress={handleSignOut}></Button>
             </View>
+        
             
             {/* <SafeAreaView style={styles.content}>
                 <ScrollView 
@@ -47,6 +52,7 @@ export function ProfileScreen({navigation}){
                 </ScrollView>
             </SafeAreaView> */}
         </Screen>
+        
     )
 }
 
