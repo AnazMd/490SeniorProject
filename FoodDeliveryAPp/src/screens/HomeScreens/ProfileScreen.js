@@ -8,6 +8,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../../firebase";
 import ProfileLists from "../../components/ProfileLists";
 
+
 const ListItem = ({name}) => {
     return (
         <View>
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         margin: 10,
         marginRight: 20
-         }, 
+      }, 
       CircleShape: {
         width: 100,
         height: 100,

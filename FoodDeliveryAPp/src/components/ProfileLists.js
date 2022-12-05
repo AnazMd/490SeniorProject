@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 
 const ProfileLists = (props) => {
@@ -7,6 +8,12 @@ const ProfileLists = (props) => {
     return (
         <View style={styles.itemSort}>
             <Text>{props.text}</Text>
+            {/*This is how you add an ICON... icon is used from react-native-elements */}
+            <Icon name='home' />
+
+            
+
+          
 
         </View>
     )
