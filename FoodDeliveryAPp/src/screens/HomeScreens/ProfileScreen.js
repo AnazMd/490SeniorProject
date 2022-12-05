@@ -6,6 +6,7 @@ import { SCREEN_NAMES } from "../../constants/navigation";
 import { Screen } from "../../components/layout/Screen";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebase";
+import ProfileLists from "../../components/ProfileLists";
 
 const ListItem = ({name}) => {
     return (
@@ -28,6 +29,16 @@ export function ProfileScreen({navigation}){
                 <View style={styles.CircleShape} /> 
                 <Text style={styles.circleText}> Profile Pic </Text>
             </View> 
+
+            {/* This will show the list options on the profile screen*/}
+            <View style={styles.items}>
+                {/* <Text style={styles.circleText}> Testing Place </Text> */}
+                <ProfileLists text ={'Profile'} /> 
+                <ProfileLists text ={'Settings...'} /> 
+                </View>
+                
+         
+        
 
 
 
@@ -64,6 +75,10 @@ export function ProfileScreen({navigation}){
 }
 
 const styles = StyleSheet.create({
+    items: {
+        marginTop: 10
+    },
+
     content: {
         flex: 1,
         backgroundColor: "#fff",
@@ -99,4 +114,9 @@ const styles = StyleSheet.create({
         borderRadius: 90 / 2,
         backgroundColor: '#BEBEBE',
       },
+
+      testSome: {
+        paddingTop: 20,
+        paddingHorizontal: 20
+      }
 })
