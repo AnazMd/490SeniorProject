@@ -30,11 +30,17 @@ export function ProfileScreen({navigation}){
                 <Text style={styles.circleText}> Profile Pic </Text>
             </View> 
 
+            <View style={styles.wrapper}> 
             {/* This will show the list options on the profile screen*/}
-            <View style={styles.items}>
-                {/* <Text style={styles.circleText}> Testing Place </Text> */}
-                <ProfileLists text ={'Profile'} /> 
-                <ProfileLists text ={'Settings...'} /> 
+                <View style={styles.items}>
+                    {/* <Text style={styles.circleText}> Testing Place </Text> */}
+                    <ProfileLists text ={'Profile'} />  
+                    <ProfileLists text ={'Notifications'} /> 
+                    <ProfileLists text ={'Weekly Summary'} /> 
+                    <ProfileLists text ={'Past Transactions'} /> 
+                    <ProfileLists text ={'General Settings'} />
+                    
+                    </View>
                 </View>
                 
          
@@ -106,8 +112,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: "center",
         margin: 10,
-        fontWeight: "bold"
-      }, 
+        marginRight: 20
+         }, 
       CircleShape: {
         width: 100,
         height: 100,
@@ -115,7 +121,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#BEBEBE',
       },
 
-      testSome: {
+      wrapper: {
         paddingTop: 20,
         paddingHorizontal: 20
       }

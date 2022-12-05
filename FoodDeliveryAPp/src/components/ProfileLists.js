@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         backgroundColor: '#FFF'
 
+    },
+    textItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        flexWrap: 'wrap'
     }
 
 
