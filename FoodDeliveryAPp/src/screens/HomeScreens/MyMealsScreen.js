@@ -20,46 +20,41 @@ export function MyMealsScreen() {
     fetchRecipes();
   }, []);
 
+  const generateMeals = () => {
+    fetchRecipes();
+    alert('Generating Meals');
+  }
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{
+      flex:1, 
+      flexDirection:'column', 
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      paddingHorizontal: 16,
+    }}>
       <Text style={{ fontSize: 48, fontWeight: 'bold', textAlign: 'center' }}>Daily Meals</Text>
-      <View>
+      
+      <View style={{ flexDirection: 'column', justifyContent: 'space-around'}}>
         {recipes && recipes.map(recipe => (
-          <View key={recipe.id}>
-            <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100 }} />
-            <Text>{recipe.title}</Text>
-            <Text>Calories: {recipe.calories}kcal</Text>
-            <Text>Fat: {recipe.fat}</Text>
-            <Text>Carbs: {recipe.carbs}</Text>
-            <Text>Protein: {recipe.protein}</Text>
-          </View>
-        ))}
+          <TouchableOpacity key={recipe.id} style={{ 
+            backgroundColor: "hsl(136, 92%, 55%)",
+            flex: 0.285,
+            aspectRatio: 2,
+            marginHorizontal: 8,
+            alignItems: 'center', 
+            justifyContent: 'center',
+          }}>
+              <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100 }} />
+              <Text>{recipe.title}</Text>
+              <Text>Calories: {recipe.calories}kcal</Text>
+              <Text>Fat: {recipe.fat}</Text>
+              <Text>Carbs: {recipe.carbs}</Text>
+              <Text>Protein: {recipe.protein}</Text>
+          </TouchableOpacity>
+        ))}  
       </View>
-      <Button title="Generate New Meals" onPress={fetchRecipes} />
-    </SafeAreaView>  
+      <Button style={{width:'50%', height:'10%'}} title="Generate New Meals" color="blue" onPress={generateMeals}></Button>
+    </SafeAreaView>
   );
-  /*
-
-            <TouchableOpacity style={{backgroundColor: "dodgerblue", width: '80%', height: '30%', 
-                    flexdirection:'column', alignItems:'center', justifyContent:'center' }}>
-                <Text>Meal 1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{backgroundColor: "gold", width: '80%', height: '30%',
-                    flexdirection:'column', alignItems:'center', justifyContent:'center' }}>
-                <Text>Meal 2</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{backgroundColor: "orange", width: '80%', height: '30%',
-                    flexdirection:'column', alignItems:'center', justifyContent:'center' }}>
-                <Text>Meal 3</Text>
-            </TouchableOpacity>
-            {/*<Text>No Meals to Display</Text>*
-            <Button style={{width:'50%', height:'10%'}} title="Generate New Meals" color="blue" onPress={()=> alert('Generating Meals')}></Button>
-          </SafeAreaView>
-    );*/
 }
-
-const styles = StyleSheet.create({
-    button: {
-        backgroundColor: "red"
-    }
-})
