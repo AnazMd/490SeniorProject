@@ -39,13 +39,14 @@ export function MyMealsScreen() {
         {recipes && recipes.map(recipe => (
           <TouchableOpacity key={recipe.id} style={{ 
             backgroundColor: "hsl(136, 92%, 55%)",
-            flex: 0.285,
-            aspectRatio: 2,
+            flex: 0.295,
+            aspectRatio: 1.8,
             marginHorizontal: 8,
             alignItems: 'center', 
             justifyContent: 'center',
+            borderRadius: 50,
           }}>
-              <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100 }} />
+              <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100, borderRadius: 10 }} />
               <Text>{recipe.title}</Text>
               <Text>Calories: {recipe.calories}kcal</Text>
               <Text>Fat: {recipe.fat}</Text>
