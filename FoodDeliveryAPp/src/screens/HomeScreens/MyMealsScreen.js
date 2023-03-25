@@ -1,12 +1,14 @@
 import React from "react";
 import{useState, useEffect} from "react";
 import { View, SafeAreaView, Text, StyleSheet, Dimensions, Button, TextInput, TouchableOpacity, Image, ActivityIndicator} from "react-native";
-import { colors, parameters, title } from "../../constants/styles";
+import { MealDetails } from '../../components/MealDetails';
+/*import { colors, parameters, title } from "../../constants/styles";
 import { Icon } from "react-native-elements/dist/icons/Icon";
 import { SCREEN_NAMES } from "../../constants/navigation";
-import { Screen } from "../../components/layout/Screen";
+import { Screen } from "../../components/layout/Screen";*/
 
 export function MyMealsScreen() {
+  const [selectedMeal, setSelectedMeal] = useState(null);
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,6 +32,11 @@ export function MyMealsScreen() {
     alert('Generating Meals');
   }
 
+  const closeModal = () => {
+    setSelectedMeal(null);
+    alert('Closing Modal');
+  };
+
   // Define the colors object
   const colors = {
   primary: "006aff",
@@ -52,10 +59,11 @@ export function MyMealsScreen() {
           <Text style={{ textAlign: "center" }}>Loading...</Text>
         </View>
       ) : (
+
         // When loaded
         <View style={{ flexDirection: 'column', justifyContent: 'space-around'}}>
           {recipes && recipes.map(recipe => (
-            <TouchableOpacity key={recipe.id} style={{ 
+            <TouchableOpacity key={recipe.id} onPress={() => setSelectedMeal(recipe.id)} style={{ 
               backgroundColor: "hsl(136, 92%, 55%)",
               flex: 0.295,
               aspectRatio: 1.8,
@@ -72,6 +80,11 @@ export function MyMealsScreen() {
                 <Text>Protein: {recipe.protein}</Text>
             </TouchableOpacity>
           ))}  
+
+          {selectedMeal && (
+            <MealDetails mealId={selectedMeal} closeModal={closeModal}/>
+          )}
+
         </View>
       )}
 
