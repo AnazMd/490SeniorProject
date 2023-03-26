@@ -1,27 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Dimensions, Button, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import { colors, parameters, title } from "../../constants/styles";
 import { Icon } from "react-native-elements/dist/icons/Icon";
 import { Screen } from "../../components/layout/Screen";
 import { auth } from "../../../firebase";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
-export function SignInScreen({ navigation}) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  
+export function SignInScreen({ navigation }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigation.navigate('Home')
+        navigation.navigate("Home");
       }
-    })
+    });
     return unsubscribe;
-  }, [])
+  }, []);
   const handleLogIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in 
+        // Signed in
         const user = userCredential.user;
         // ...
       })
@@ -29,133 +36,128 @@ export function SignInScreen({ navigation}) {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-  }
+  };
 
   return (
-    <Screen>
-      <View style={styles.content}>
-        <View >
-            <Icon size={80} iconStyle={styles.iconStyle} type = "material" name="restaurant" />
+    <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
+      <View style={{ paddingHorizontal: 25 }}>
+        <View style={{ alignItems: "center" }}>
+          <Icon size={150} type="material" name="restaurant" />
         </View>
-        <View style = {styles.inputView}>
-            <TextInput
-                style = {styles.TextInput}
-                placeholder="Enter Your Email"
-                placeholderTextColor = "003f5c"
-                value = {email}
-                onChangeText={text => setEmail(text)}
+        <Text style={styles.header}>Login</Text>
+        <View style={styles.textInput}>
+          <TextInput
+            style={{ flex: 1 }}
+            placeholder="Enter Your Email"
+            placeholderTextColor="#ccc"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+          />
+        </View>
+        <View style={styles.textInput}>
+          <TextInput
+            style={{ flex: 1 }}
+            placeholder="Enter Your Password"
+            placeholderTextColor="#ccc"
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            secureTextEntry
+          />
+          <TouchableOpacity>
+            <Text style={{ color: "#AD40AF", fontWeight: "700" }}>Forgot?</Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity style={styles.loginBtn} onPress={handleLogIn}>
+          <Text style={styles.loginText}>Login</Text>
+        </TouchableOpacity>
+
+        <Text
+          style={{
+            textAlign: "center",
+            color: "#666",
+            marginBottom: 30,
+          }}
+        >
+          Or, login with...
+        </Text>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-evenly",
+            marginBottom: 30,
+          }}
+        >
+          <TouchableOpacity
+            style={[styles.alternateLogin, { backgroundColor: "#4267B2" }]}
+          >
+            <Icon
+              iconStyle={{ color: "white" }}
+              type="ionicon"
+              name="logo-facebook"
             />
-        </View>
-        <View style = {styles.inputView}>
-            <TextInput
-                style = {styles.TextInput}
-                placeholder="Enter Your Password"
-                placeholderTextColor = "003f5c"
-                value = {password}
-                onChangeText={text => setPassword(text)}
-                secureTextEntry
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.alternateLogin, { backgroundColor: "#DB4437" }]}
+          >
+            <Icon
+              iconStyle={{ color: "white" }}
+              type="ionicon"
+              name="logo-google"
             />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity>
-            <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
-        <View style={{width: "80%", alignItems:"center", justifyContent: "center"}}>
-            <TouchableOpacity style={styles.loginBtn} onPress={handleLogIn}>
-                <Text style={styles.loginText} >LogIn</Text>
-            </TouchableOpacity>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            marginBottom: 30,
+          }}
+        >
+          <Text>New User?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+            <Text style={{ color: "#AD40AF", fontWeight: "700" }}>
+              {" "}
+              Register
+            </Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.SignUpBtn} onPress={()=> navigation.navigate('SignUp')}>
-            <Text style={styles.loginText} >Sign Up</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.FaceBookBtn } onPress={()=> navigation.navigate('SignUp')}>
-            <Icon iconStyle= {{color: "white"}} type="ionicon" name="logo-facebook"/>
-            <Text style={styles.loginText} >Sign Up With Meta</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.GoogleBtn} onPress={()=> navigation.navigate('SignUp')}>
-            <Icon iconStyle= {{color: "white"}} type="ionicon" name="logo-google"/>
-            <Text style={styles.loginText} >Sign Up With Google</Text>
-        </TouchableOpacity>
-        <Text style={{marginTop: 10, height: 70, }}>Or Sign Up Instead</Text>
-        
       </View>
-    </Screen>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
+  header: {
+    fontSize: 28,
+    fontWeight: "500",
+    color: "#333",
+    marginBottom: 30,
   },
-  TextInput: {
-    height: 50,
-    flex: 1,
-    padding: 10,
-    marginLeft: 10,
-    //backgroundColor: "white",
-  },
-  inputView: {
-    backgroundColor: "white",
-    borderRadius: 30,
-    borderWidth: 1,
-    width: "70%",
-    height: 45,
-    marginBottom: 20,
-    alignItems: "center",
-  },
-  forgot_button: {
-    height: 30,
-    marginBottom: 10,
+  textInput: {
+    flexDirection: "row",
+    borderBottomColor: "#ccc",
+    borderBottomWidth: 1,
+    paddingBottom: 8,
+    marginBottom: 25,
   },
   loginBtn: {
-    width: "80%",
-    borderRadius: 25,
-    borderWidth: 1,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 80,
-    backgroundColor: "lightgray",
-  },
-  SignUpBtn: {
-    width: "80%",
-    borderRadius: 25,
-    borderWidth: 1,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 10,
-    backgroundColor: "lightgray",
-  },
-  FaceBookBtn: {
-    width: "80%",
-    flexDirection: "row",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    marginTop: 10,
-    backgroundColor: "#4267B2",
-  },
-  GoogleBtn: {
-    width: "80%",
-    flexDirection: "row",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    marginTop: 10,
-    backgroundColor: "#DB4437",
+    backgroundColor: "#AD40AF",
+    padding: 20,
+    borderRadius: 10,
+    marginBottom: 30,
   },
   loginText: {
+    textAlign: "center",
+    fontWeight: "700",
+    fontSize: 16,
     color: "white",
-    fontSize: "20",
   },
-  iconStyle: {
-    color: "gray",
-    marginBottom: 50
-
-  }
+  alternateLogin: {
+    borderColor: "#ddd",
+    borderWidth: 2,
+    borderRadius: 10,
+    paddingHorizontal: 30,
+    paddingVertical: 10,
+  },
 });
