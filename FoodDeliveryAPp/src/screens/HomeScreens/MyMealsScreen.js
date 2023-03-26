@@ -12,8 +12,12 @@ export function MyMealsScreen() {
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // cisco's api key: ccc7636d8ca643b3aeaa0428a3e1efe9
+  // Pouria: b932a28a292846c3b80c7bd9475e4577
+  // Anaz: e095e14b3aba4f8a86d65bbbec9d5258
+  // Extra: ad6b49472d7e4267891b4a52dcc07a2c
   const fetchRecipes = () => {
-    fetch(`https://api.spoonacular.com/recipes/findByNutrients?number=3&random=true&minCalories=0&apiKey=ccc7636d8ca643b3aeaa0428a3e1efe9`)
+    fetch(`https://api.spoonacular.com/recipes/findByNutrients?number=3&random=true&minCalories=0&apiKey=e095e14b3aba4f8a86d65bbbec9d5258`)
       .then(response => response.json())
       .then(data => {
         setRecipes(data);
@@ -29,12 +33,10 @@ export function MyMealsScreen() {
   const generateMeals = () => {
     setIsLoading(true);
     fetchRecipes();
-    alert('Generating Meals');
   }
 
   const closeModal = () => {
     setSelectedMeal(null);
-    alert('Closing Modal');
   };
 
   // Define the colors object
