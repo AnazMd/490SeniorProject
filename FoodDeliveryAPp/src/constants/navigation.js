@@ -7,4 +7,5 @@ export const SCREEN_NAMES = {
   MyMeals: "MyMeals",
   Home: "Home",
   Ingredients: "Ingredients",
+  Search: "Search",
 };

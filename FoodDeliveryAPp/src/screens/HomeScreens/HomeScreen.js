@@ -9,6 +9,7 @@ import { ProfileScreen } from "./ProfileScreen";
 import { IngredientsScreen } from "./IngredientsScreen";
 import { MyMealsScreen } from "./MyMealsScreen";
 import { RecipesScreen } from "./RecipesScreen";
+import { Search } from "./Search";
 
 const Tabs = createBottomTabNavigator();
 
@@ -17,6 +18,7 @@ export function HomeScreen() {
         <Tabs.Navigator screenOptions={{headerShown: false}}>
             <Tabs.Screen name={SCREEN_NAMES.MyMeals} component={MyMealsScreen}/>
             <Tabs.Screen name={SCREEN_NAMES.Profile} component={ProfileScreen}/>
+            <Tabs.Screen name={SCREEN_NAMES.Search} component={Search}/>
             {/* <Tabs.Screen name={SCREEN_NAMES.Recipes} component={RecipesScreen}/>
             <Tabs.Screen name={SCREEN_NAMES.Ingredients} component={IngredientsScreen}/> */}
           </Tabs.Navigator>
