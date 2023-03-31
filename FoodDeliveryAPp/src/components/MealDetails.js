@@ -7,7 +7,7 @@ export function MealDetails({ mealId, closeModal/*, setSelectedMeal*/ }) {
 
   // fetch image and ingredients
   const fetchIngredients = (mealId) => {
-    fetch(`https://api.spoonacular.com/recipes/${mealId}/information?includeNutrition=true&apiKey=e095e14b3aba4f8a86d65bbbec9d5258`)
+    fetch(`https://api.spoonacular.com/recipes/${mealId}/information?includeNutrition=true&apiKey=b932a28a292846c3b80c7bd9475e4577`)
       .then((response) => response.json())
       .then((data) => {
         setDetails(data);
@@ -21,7 +21,7 @@ export function MealDetails({ mealId, closeModal/*, setSelectedMeal*/ }) {
 
   useEffect(() => {
     const fetchInstructions = (mealId) => {
-      fetch(`https://api.spoonacular.com/recipes/${mealId}/analyzedInstructions?apiKey=e095e14b3aba4f8a86d65bbbec9d5258`)
+      fetch(`https://api.spoonacular.com/recipes/${mealId}/analyzedInstructions?apiKey=b932a28a292846c3b80c7bd9475e4577`)
         .then(response => response.json())
         .then(data => {
           setInstructions(data);
@@ -40,7 +40,7 @@ export function MealDetails({ mealId, closeModal/*, setSelectedMeal*/ }) {
   };
 
   if (!details) {
-    return <ActivityIndicator />;
+    return <ActivityIndicator size="large" color="blue" />
   }
 
   return (
@@ -52,25 +52,25 @@ export function MealDetails({ mealId, closeModal/*, setSelectedMeal*/ }) {
       > 
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Button title="Close" onPress={handleModalClose} />
-            <Text>{details.title}</Text>
-            <Image source={{ uri: details.image }} style={{ width: 100, height: 100, borderRadius: 10 }} />
+            <Button title="Close" color="blue" onPress={handleModalClose} />
+            <Text style={[{fontSize: 34}, styles.modalText]}>{details.title}</Text>
+            <Image source={{ uri: details.image} } style={{ width: 150, height: 150, borderRadius: 10 }} />
             
-            <Text>Ingredients: </Text>
+            <Text style={[{fontSize: 24}, styles.modalText]}>Ingredients: </Text>
             <FlatList
               data={details.extendedIngredients}
               keyExtractor={(i) => i.id}
-              renderItem={({ item }) => <Text>{item.original}</Text>}
+              renderItem={({ item }) => <Text style={[{fontSize: 16}, styles.modalText]}>-{item.original}</Text>}
             />
 
             <Text/>
 
-            <Text>Instructions: </Text>
+            <Text style={[{fontSize: 24}, styles.modalText]}>Instructions: </Text>
             {instructions && instructions[0] && instructions[0].steps && (
               <FlatList
                 data={instructions[0].steps}
                 keyExtractor={(i) => i.number}
-                renderItem={({ item }) => <Text>{item.step}</Text>}
+                renderItem={({ item }) => <Text style={[{fontSize: 16}, styles.modalText]}>-{item.step}</Text>}
               />
             )}
 
@@ -89,10 +89,18 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
-    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#AD40AF",
     padding: 20,
     borderRadius: 10,
     width: "80%",
     height: "68%",
+  },
+  modalText: {
+    color: "white",
+  },
+  flatList: {
+    backgroundColor: "white"
   },
 });

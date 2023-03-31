@@ -17,7 +17,7 @@ export function MyMealsScreen() {
   // Anaz: e095e14b3aba4f8a86d65bbbec9d5258
   // Extra: ad6b49472d7e4267891b4a52dcc07a2c
   const fetchRecipes = () => {
-    fetch(`https://api.spoonacular.com/recipes/findByNutrients?number=3&random=true&minCalories=0&apiKey=e095e14b3aba4f8a86d65bbbec9d5258`)
+    fetch(`https://api.spoonacular.com/recipes/findByNutrients?number=3&random=true&minCalories=0&apiKey=b932a28a292846c3b80c7bd9475e4577`)
       .then(response => response.json())
       .then(data => {
         setRecipes(data);
@@ -39,10 +39,10 @@ export function MyMealsScreen() {
     setSelectedMeal(null);
   };
 
-  // Define the colors object
-  const colors = {
-  primary: "006aff",
-  };
+  const windowWidth = Dimensions.get("window").width;
+  const windowHeight = Dimensions.get("window").height;
+  const boxWidth = windowWidth * 0.885;
+  const boxHeight = windowHeight * 0.2425;
 
   return (
     <SafeAreaView style={{
@@ -56,30 +56,35 @@ export function MyMealsScreen() {
       
       {isLoading ? (
         // When loading
-        <View style={{ flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-          <ActivityIndicator size={100} color={colors.primary} />
-          <Text style={{ textAlign: "center" }}>Loading...</Text>
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+          <ActivityIndicator size="large" color="blue" />
+            <Text>Loading...</Text>
         </View>
       ) : (
 
         // When loaded
-        <View style={{ flexDirection: 'column', justifyContent: 'space-around'}}>
+        <View style={{ 
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
           {recipes && recipes.map(recipe => (
             <TouchableOpacity key={recipe.id} onPress={() => setSelectedMeal(recipe.id)} style={{ 
-              backgroundColor: "hsl(136, 92%, 55%)",
-              flex: 0.295,
-              aspectRatio: 1.8,
-              marginHorizontal: 8,
+              backgroundColor: "#AD40AF",
+              margin: 10,
               alignItems: 'center', 
               justifyContent: 'center',
               borderRadius: 50,
+              width: boxWidth, 
+              height: boxHeight,
             }}>
                 <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100, borderRadius: 10 }} />
-                <Text>{recipe.title}</Text>
-                <Text>Calories: {recipe.calories}kcal</Text>
-                <Text>Fat: {recipe.fat}</Text>
-                <Text>Carbs: {recipe.carbs}</Text>
-                <Text>Protein: {recipe.protein}</Text>
+                <Text style={[{fontSize: 18}, styles.textInfo]}>{recipe.title}</Text>
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Calories: {recipe.calories}kcal</Text>
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Fat: {recipe.fat}</Text>
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.carbs}</Text>
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Protein: {recipe.protein}</Text>
             </TouchableOpacity>
           ))}  
 
@@ -94,3 +99,9 @@ export function MyMealsScreen() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  textInfo: {
+    color: "white",
+  }
+})
