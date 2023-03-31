@@ -17,7 +17,7 @@ export function MyMealsScreen() {
   // Anaz: e095e14b3aba4f8a86d65bbbec9d5258
   // Extra: ad6b49472d7e4267891b4a52dcc07a2c
   const fetchRecipes = () => {
-    fetch(`https://api.spoonacular.com/recipes/findByNutrients?number=3&random=true&minCalories=0&apiKey=e095e14b3aba4f8a86d65bbbec9d5258`)
+    fetch(`https://api.spoonacular.com/recipes/findByNutrients?number=3&random=true&minCalories=0&apiKey=b932a28a292846c3b80c7bd9475e4577`)
       .then(response => response.json())
       .then(data => {
         setRecipes(data);
@@ -42,7 +42,7 @@ export function MyMealsScreen() {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   const boxWidth = windowWidth * 0.885;
-  const boxHeight = windowHeight * 0.23;
+  const boxHeight = windowHeight * 0.2425;
 
   return (
     <SafeAreaView style={{
@@ -80,11 +80,11 @@ export function MyMealsScreen() {
               height: boxHeight,
             }}>
                 <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100, borderRadius: 10 }} />
-                <Text style={styles.textInfo}>{recipe.title}</Text>
-                <Text style={styles.textInfo}>Calories: {recipe.calories}kcal</Text>
-                <Text style={styles.textInfo}>Fat: {recipe.fat}</Text>
-                <Text style={styles.textInfo}>Carbs: {recipe.carbs}</Text>
-                <Text style={styles.textInfo}>Protein: {recipe.protein}</Text>
+                <Text style={[{fontSize: 18}, styles.textInfo]}>{recipe.title}</Text>
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Calories: {recipe.calories}kcal</Text>
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Fat: {recipe.fat}</Text>
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.carbs}</Text>
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Protein: {recipe.protein}</Text>
             </TouchableOpacity>
           ))}  
 

@@ -23,7 +23,7 @@ export function Search(){
 */}
   const handleSearch = (query) => {
     setIsLoading(true);
-    fetch(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&addRecipeNutrition=true&instructionsRequired=true&number=3&query=${query}&apiKey=e095e14b3aba4f8a86d65bbbec9d5258`)
+    fetch(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&addRecipeNutrition=true&instructionsRequired=true&number=3&query=${query}&apiKey=b932a28a292846c3b80c7bd9475e4577`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -65,7 +65,7 @@ export function Search(){
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   const boxWidth = windowWidth * 0.885;
-  const boxHeight = windowHeight * 0.23;
+  const boxHeight = windowHeight * 0.2425;
 
   return (
     <SafeAreaView style={styles.page}>
@@ -93,11 +93,11 @@ export function Search(){
                 style={[styles.boxes, {width: boxWidth, height: boxHeight}]}
               >
                 <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100, borderRadius: 10 }} />
-                <Text style={styles.textInfo}>{recipe.title}</Text>
-                <Text style={styles.textInfo}>Calories: {recipe.nutrientAmounts["Calories"]} kcal</Text>
-                <Text style={styles.textInfo}>Fat: {recipe.nutrientAmounts["Fat"]} g</Text>
-                <Text style={styles.textInfo}>Carbs: {recipe.nutrientAmounts["Carbohydrates"]} g</Text>
-                <Text style={styles.textInfo}>Protein: {recipe.nutrientAmounts["Protein"]} g</Text>
+                <Text style={[{fontSize: 18}, styles.textInfo]}>{recipe.title}</Text>
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Calories: {recipe.nutrientAmounts["Calories"]} kcal</Text>
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Fat: {recipe.nutrientAmounts["Fat"]} g</Text>
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.nutrientAmounts["Carbohydrates"]} g</Text>
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Protein: {recipe.nutrientAmounts["Protein"]} g</Text>
                 {console.log(`Recipe ${index + 1}: ${recipe.title}`)}
               </TouchableOpacity>
             ))}
