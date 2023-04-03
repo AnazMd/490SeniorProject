@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, TextInput, TouchableOpacity, Image, Button, ActivityIndicator, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, TouchableOpacity, Image, Button, ActivityIndicator, StyleSheet, Dimensions, ScrollView, Modal, TouchableWithoutFeedback } from 'react-native';
 import { MealDetails } from '../../components/MealDetails';
 
 export function Search(){
@@ -7,6 +7,15 @@ export function Search(){
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const modalTextOpen = () => {
+    setModalVisible(true);
+  }
+
+  const modalTextClose = () => {
+    setModalVisible(false);
+  }
  
   {/*}
   const handleSearch = (query) => {
@@ -101,7 +110,15 @@ export function Search(){
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.nutrientAmounts["Carbohydrates"]} g</Text>
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Protein: {recipe.nutrientAmounts["Protein"]} g</Text>
                 {/* a popup to replace the meals */}
+                <TouchableWithoutFeedback onPress={modalTextOpen}>
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Replace Meal</Text>
+                </TouchableWithoutFeedback>
+                {/* <Modal visible={modalVisible} onRequestClose={modalTextClose}>
+                  <View>
+                      <Text>Testingbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb text</Text>
+                  </View>
+                </Modal> */}
+                {/* irrelevant */}
                 {console.log(`Recipe ${index + 1}: ${recipe.title}`)}
               </TouchableOpacity>
             ))}
