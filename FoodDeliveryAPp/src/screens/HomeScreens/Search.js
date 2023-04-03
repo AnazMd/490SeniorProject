@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, TextInput, TouchableOpacity, Image, Button, ActivityIndicator, StyleSheet, Dimensions } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, TouchableOpacity, Image, Button, ActivityIndicator, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { MealDetails } from '../../components/MealDetails';
 
 export function Search(){
@@ -64,10 +64,12 @@ export function Search(){
 
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
-  const boxWidth = windowWidth * 0.885;
-  const boxHeight = windowHeight * 0.2425;
+  const boxWidth = windowWidth * 0.885; //prev value was 0.885
+  const boxHeight = windowHeight * 0.4; //prev value was 0.2425
 
   return (
+    // Added scrolling feature
+    <ScrollView contentContainerStyle={styles.scroll_container}>
     <SafeAreaView style={styles.page}>
       <View style={styles.container}>
         <TextInput
@@ -98,6 +100,8 @@ export function Search(){
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Fat: {recipe.nutrientAmounts["Fat"]} g</Text>
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.nutrientAmounts["Carbohydrates"]} g</Text>
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Protein: {recipe.nutrientAmounts["Protein"]} g</Text>
+                {/* a popup to replace the meals */}
+                <Text style={[{fontSize: 16}, styles.textInfo]}>Replace Meal</Text>
                 {console.log(`Recipe ${index + 1}: ${recipe.title}`)}
               </TouchableOpacity>
             ))}
@@ -112,10 +116,16 @@ export function Search(){
         )}
       </View>
     </SafeAreaView>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  // Regarding the SCREEN SHAKE when you scroll up, it is because some of the stuff INSIDE THE SCROLLVIEW is too large to render
+  // Thus, to fix that, increase the minHeight if necessary
+  scroll_container: {
+    minHeight: '165%',
+  },
   page: {
     flex:1, 
     flexDirection:'column', 
