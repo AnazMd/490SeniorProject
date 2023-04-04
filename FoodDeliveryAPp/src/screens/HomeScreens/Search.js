@@ -107,7 +107,7 @@ export function Search(){
                   style={[styles.boxes, {width: boxWidth, height: boxHeight}]}
                 >
                   <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100, borderRadius: 10 }} />
-                  <Text style={[{fontSize: 18}, styles.textInfo]}>{recipe.title}</Text>
+                  <Text style={[{fontSize: 18, fontWeight: 'bold'}, styles.textInfo]}>{recipe.title}</Text>
                   <Text style={[{fontSize: 16}, styles.textInfo]}>Calories: {recipe.nutrientAmounts["Calories"]} kcal</Text>
                   <Text style={[{fontSize: 16}, styles.textInfo]}>Fat: {recipe.nutrientAmounts["Fat"]} g</Text>
                   <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.nutrientAmounts["Carbohydrates"]} g</Text>
