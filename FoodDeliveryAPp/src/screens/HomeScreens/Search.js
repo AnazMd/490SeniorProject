@@ -76,19 +76,9 @@ export function Search(){
   const boxWidth = windowWidth * 0.885; //prev value was 0.885
   const boxHeight = windowHeight * 0.27; //prev value was 0.2425
 
-  const modalStyles = {
-    modalContainer: {
-      flex: 1,
-      backgroundColor: 'white',
-      borderRadius: 10,
-      padding: 10,
-      margin: 50,
-    },
-  };
-
   return (
     // Added scrolling feature
-    <ScrollView contentContainerStyle={styles.scroll_container}>
+    
     <SafeAreaView style={styles.page}>
       <View style={styles.container}>
         <TextInput
@@ -99,65 +89,69 @@ export function Search(){
         />
         <Button title="Search" onPress={() => handleSearch(query)} />
       </View>
-      <View style={styles.resultLayout}>
-        {isLoading ? (
-          <View style={styles.loading}>
-            <ActivityIndicator size="large" color="blue" />
-            <Text>Loading...</Text>
+      <ScrollView contentContainerStyle={styles.scroll_container}>
+        <View style={styles.resultLayout}>
+          {isLoading ? (
+            <View style={styles.loading}>
+              <ActivityIndicator size="large" color="blue" />
+              <Text>Loading...</Text>
+            </View>
+          ) : searchResults.length > 0 ? (
+            <View style={styles.boxLayout}>
+              {searchResults && searchResults.map((recipe, index) => (
+                <TouchableOpacity
+                  key={recipe.id}
+                  onPress={() => setSelectedMeal(recipe.id)}
+                  style={[styles.boxes, {width: boxWidth, height: boxHeight}]}
+                >
+                  <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100, borderRadius: 10 }} />
+                  <Text style={[{fontSize: 18}, styles.textInfo]}>{recipe.title}</Text>
+                  <Text style={[{fontSize: 16}, styles.textInfo]}>Calories: {recipe.nutrientAmounts["Calories"]} kcal</Text>
+                  <Text style={[{fontSize: 16}, styles.textInfo]}>Fat: {recipe.nutrientAmounts["Fat"]} g</Text>
+                  <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.nutrientAmounts["Carbohydrates"]} g</Text>
+                  <Text style={[{fontSize: 16}, styles.textInfo]}>Protein: {recipe.nutrientAmounts["Protein"]} g</Text>
+                  {/* a popup to replace the meals */}
+                  <TouchableWithoutFeedback onPress={openModal}>
+                    <Text style={[{fontSize: 18, color: "#00FFFF"}]}>Replace Meal</Text>
+                  </TouchableWithoutFeedback>
+                  {/* Below is the Modal */}
+                  
+                  {console.log(`Recipe ${index + 1}: ${recipe.title}`)}
+                </TouchableOpacity>
+              ))}
+
+              {selectedMeal && (
+                <MealDetails mealId={selectedMeal} closeModal={closeModal} />
+              )}
+            </View>
+          ) : (
+            <View style={styles.loading}>
+              {!isLoading && <Text>Meals will be displayed here.</Text>}
+            </View>
+          )}
+        </View>
+      </ScrollView>
+
+      <Modal visible={modalVisible} transparent={true} onRequestClose={shutModal}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Replace Meal</Text>
+            <Button title="Replace" color={"#00FFFF"}/>
+            <Button title="Cancel" color={"#00FFFF"} onPress={shutModal} />
           </View>
-        ) : searchResults.length > 0 ? (
-          <View style={styles.boxLayout}>
-            {searchResults && searchResults.map((recipe, index) => (
-              <TouchableOpacity
-                key={recipe.id}
-                onPress={() => setSelectedMeal(recipe.id)}
-                style={[styles.boxes, {width: boxWidth, height: boxHeight}]}
-              >
-                <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100, borderRadius: 10 }} />
-                <Text style={[{fontSize: 18}, styles.textInfo]}>{recipe.title}</Text>
-                <Text style={[{fontSize: 16}, styles.textInfo]}>Calories: {recipe.nutrientAmounts["Calories"]} kcal</Text>
-                <Text style={[{fontSize: 16}, styles.textInfo]}>Fat: {recipe.nutrientAmounts["Fat"]} g</Text>
-                <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.nutrientAmounts["Carbohydrates"]} g</Text>
-                <Text style={[{fontSize: 16}, styles.textInfo]}>Protein: {recipe.nutrientAmounts["Protein"]} g</Text>
-                {/* a popup to replace the meals */}
-                <TouchableWithoutFeedback onPress={openModal}>
-                <Text style={[{fontSize: 16, color: "#00FFFF"}]}>Replace Meal</Text>
-                </TouchableWithoutFeedback>
-                {/* Below is the Modal */}
-                <Modal visible={modalVisible} transparent={true} onRequestClose={shutModal}>
-                <View style={modalStyles.modalContainer}>
-                  <View style={modalStyles.modalContent}>
-                    <Text style={modalStyles.modalText}>Replace Meal</Text>
-                    <Button title="Replace" />
-                    <Button title="Cancel" onPress={shutModal} />
-                  </View>
-                </View>
-              </Modal>
-              {/* Below is a BACKUP modal, DO NOT REMOVE */}
-                {/* <Modal visible={modalVisible} onRequestClose={shutModal}>
-                <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                  <Text>Modal Content Goes Here</Text>
-                  <TouchableOpacity onPress={shutModal}>
-                    <Text>Close Modal</Text>
-                  </TouchableOpacity>
-                </View>
-              </Modal> */}
-                {console.log(`Recipe ${index + 1}: ${recipe.title}`)}
-              </TouchableOpacity>
-            
-            ))}
-            {selectedMeal && (
-              <MealDetails mealId={selectedMeal} closeModal={closeModal} />
-            )}
+        </View>
+      </Modal>
+      {/* Below is a BACKUP modal, DO NOT REMOVE */}
+        {/* <Modal visible={modalVisible} onRequestClose={shutModal}>
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <Text>Modal Content Goes Here</Text>
+            <TouchableOpacity onPress={shutModal}>
+              <Text>Close Modal</Text>
+            </TouchableOpacity>
           </View>
-        ) : (
-          <View style={styles.loading}>
-            {!isLoading && <Text>Meals will be displayed here.</Text>}
-          </View>
-        )}
-      </View>
+        </Modal> */}
+
     </SafeAreaView>
-    </ScrollView>
   );
 }
 
@@ -165,29 +159,25 @@ const styles = StyleSheet.create({
 
   //Stuff for the Modal popup
   modalContainer: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    margin: 50,
-    padding: 40, 
-    borderRadius:10,
     flex: 1,
-    // height: 100,
-    // width: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
-    backgroundColor: '#fff',
-    width: 50,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#AD40AF",
     padding: 20,
+    borderRadius: 10,
+    width: "80%",
+    height: "68%",
   },
   modalText: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: "white",
   },
   // Regarding the SCREEN SHAKE when you scroll up, it is because some of the stuff INSIDE THE SCROLLVIEW is too large to render
   // Thus, to fix that, increase the minHeight if necessary
