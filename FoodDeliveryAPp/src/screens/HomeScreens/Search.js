@@ -9,13 +9,13 @@ export function Search(){
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const modalTextOpen = () => {
+  const openModal = () => {
     setModalVisible(true);
-  }
+  };
 
-  const modalTextClose = () => {
+  const shutModal = () => {
     setModalVisible(false);
-  }
+  };
  
   {/*}
   const handleSearch = (query) => {
@@ -76,6 +76,16 @@ export function Search(){
   const boxWidth = windowWidth * 0.885; //prev value was 0.885
   const boxHeight = windowHeight * 0.4; //prev value was 0.2425
 
+  const modalStyles = {
+    modalContainer: {
+      flex: 1,
+      backgroundColor: 'white',
+      borderRadius: 10,
+      padding: 10,
+      margin: 50,
+    },
+  };
+
   return (
     // Added scrolling feature
     <ScrollView contentContainerStyle={styles.scroll_container}>
@@ -110,17 +120,31 @@ export function Search(){
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.nutrientAmounts["Carbohydrates"]} g</Text>
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Protein: {recipe.nutrientAmounts["Protein"]} g</Text>
                 {/* a popup to replace the meals */}
-                <TouchableWithoutFeedback onPress={modalTextOpen}>
+                <TouchableWithoutFeedback onPress={openModal}>
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Replace Meal</Text>
                 </TouchableWithoutFeedback>
-                {/* <Modal visible={modalVisible} onRequestClose={modalTextClose}>
-                  <View>
-                      <Text>Testingbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb text</Text>
+                {/* Below is the Modal */}
+                <Modal visible={modalVisible} transparent={true} onRequestClose={shutModal}>
+                <View style={modalStyles.modalContainer}>
+                  <View style={modalStyles.modalContent}>
+                    <Text style={modalStyles.modalText}>Replace Meal</Text>
+                    <Button title="Replace" />
+                    <Button title="Cancel" onPress={shutModal} />
                   </View>
-                </Modal> */}
-                {/* irrelevant */}
+                </View>
+              </Modal>
+              {/* Below is a BACKUP modal, DO NOT REMOVE */}
+                {/* <Modal visible={modalVisible} onRequestClose={shutModal}>
+                <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                  <Text>Modal Content Goes Here</Text>
+                  <TouchableOpacity onPress={shutModal}>
+                    <Text>Close Modal</Text>
+                  </TouchableOpacity>
+                </View>
+              </Modal> */}
                 {console.log(`Recipe ${index + 1}: ${recipe.title}`)}
               </TouchableOpacity>
+            
             ))}
             {selectedMeal && (
               <MealDetails mealId={selectedMeal} closeModal={closeModal} />
@@ -138,6 +162,33 @@ export function Search(){
 }
 
 const styles = StyleSheet.create({
+
+  //Stuff for the Modal popup
+  modalContainer: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    margin: 50,
+    padding: 40, 
+    borderRadius:10,
+    flex: 1,
+    // height: 100,
+    // width: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    padding: 20,
+  },
+  modalText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
   // Regarding the SCREEN SHAKE when you scroll up, it is because some of the stuff INSIDE THE SCROLLVIEW is too large to render
   // Thus, to fix that, increase the minHeight if necessary
   scroll_container: {
