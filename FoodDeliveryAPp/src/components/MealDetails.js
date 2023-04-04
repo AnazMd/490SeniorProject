@@ -52,7 +52,7 @@ export function MealDetails({ mealId, closeModal/*, setSelectedMeal*/ }) {
       > 
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Button title="Close" color="blue" onPress={handleModalClose} />
+            <Button title="Close" color="#00FFFF" onPress={handleModalClose} />
             <Text style={[{fontSize: 34}, styles.modalText]}>{details.title}</Text>
             <Image source={{ uri: details.image} } style={{ width: 150, height: 150, borderRadius: 10 }} />
             

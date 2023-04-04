@@ -32,7 +32,7 @@ export function Search(){
 */}
   const handleSearch = (query) => {
     setIsLoading(true);
-    fetch(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&addRecipeNutrition=true&instructionsRequired=true&number=3&query=${query}&apiKey=b932a28a292846c3b80c7bd9475e4577`)
+    fetch(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&addRecipeNutrition=true&instructionsRequired=true&number=5&query=${query}&apiKey=b932a28a292846c3b80c7bd9475e4577`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -74,7 +74,7 @@ export function Search(){
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   const boxWidth = windowWidth * 0.885; //prev value was 0.885
-  const boxHeight = windowHeight * 0.4; //prev value was 0.2425
+  const boxHeight = windowHeight * 0.27; //prev value was 0.2425
 
   const modalStyles = {
     modalContainer: {
@@ -121,7 +121,7 @@ export function Search(){
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Protein: {recipe.nutrientAmounts["Protein"]} g</Text>
                 {/* a popup to replace the meals */}
                 <TouchableWithoutFeedback onPress={openModal}>
-                <Text style={[{fontSize: 16}, styles.textInfo]}>Replace Meal</Text>
+                <Text style={[{fontSize: 16, color: "#00FFFF"}]}>Replace Meal</Text>
                 </TouchableWithoutFeedback>
                 {/* Below is the Modal */}
                 <Modal visible={modalVisible} transparent={true} onRequestClose={shutModal}>
