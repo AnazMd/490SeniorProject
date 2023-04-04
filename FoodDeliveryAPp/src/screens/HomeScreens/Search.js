@@ -6,6 +6,7 @@ export function Search(){
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchClicked, setSearchClicked] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -32,6 +33,7 @@ export function Search(){
 */}
   const handleSearch = (query) => {
     setIsLoading(true);
+    setSearchClicked(true);
     fetch(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&addRecipeNutrition=true&instructionsRequired=true&number=5&query=${query}&apiKey=b932a28a292846c3b80c7bd9475e4577`)
       .then((response) => {
         if (!response.ok) {
@@ -126,7 +128,8 @@ export function Search(){
             </View>
           ) : (
             <View style={styles.loading}>
-              {!isLoading && <Text>Meals will be displayed here.</Text>}
+              {!isLoading && !searchClicked &&<Text style={styles.searchPrompts}>Meals will be displayed here.</Text>}
+              {!isLoading && searchClicked &&<Text style={styles.searchPrompts}>No Results.</Text>}
             </View>
           )}
         </View>
@@ -182,7 +185,8 @@ const styles = StyleSheet.create({
   // Regarding the SCREEN SHAKE when you scroll up, it is because some of the stuff INSIDE THE SCROLLVIEW is too large to render
   // Thus, to fix that, increase the minHeight if necessary
   scroll_container: {
-    minHeight: '165%',
+    // Meals will be displayed here text and no result text will look centered
+    minHeight: '80%',
   },
   page: {
     flex:1, 
@@ -231,5 +235,9 @@ const styles = StyleSheet.create({
   },
   textInfo: {
     color: "white",
+  },
+  searchPrompts: {
+    fontSize: 20,
+    color: "#AD40AF"
   }
 });
