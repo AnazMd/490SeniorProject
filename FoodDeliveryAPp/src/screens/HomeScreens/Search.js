@@ -76,7 +76,7 @@ export function Search(){
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   const boxWidth = windowWidth * 0.885; //prev value was 0.885
-  const boxHeight = windowHeight * 0.27; //prev value was 0.2425
+  const boxHeight = windowHeight * 0.29; //prev value was 0.2425
 
   return (
     // Added scrolling feature
@@ -107,7 +107,7 @@ export function Search(){
                   style={[styles.boxes, {width: boxWidth, height: boxHeight}]}
                 >
                   <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100, borderRadius: 10 }} />
-                  <Text style={[{fontSize: 18, fontWeight: 'bold'}, styles.textInfo]}>{recipe.title}</Text>
+                  <Text style={[{fontSize: 18, fontWeight: 'bold'}, styles.textInfo]} numberOfLines={2}>{recipe.title}</Text>
                   <Text style={[{fontSize: 16}, styles.textInfo]}>Calories: {recipe.nutrientAmounts["Calories"]} kcal</Text>
                   <Text style={[{fontSize: 16}, styles.textInfo]}>Fat: {recipe.nutrientAmounts["Fat"]} g</Text>
                   <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.nutrientAmounts["Carbohydrates"]} g</Text>

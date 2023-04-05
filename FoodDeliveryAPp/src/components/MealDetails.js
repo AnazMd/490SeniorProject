@@ -53,7 +53,7 @@ export function MealDetails({ mealId, closeModal/*, setSelectedMeal*/ }) {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Button title="Close" color="#00FFFF" onPress={handleModalClose} />
-            <Text style={[{fontSize: 26, fontWeight: 'bold'}, styles.modalText]}>{details.title}</Text>
+            <Text style={[{fontSize: 24, fontWeight: 'bold'}, styles.modalText]}>{details.title}</Text>
             <Image source={{ uri: details.image} } style={{ width: 150, height: 150, borderRadius: 10 }} />
             
             <Text style={[{fontSize: 24}, styles.modalText]}>Ingredients: </Text>
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     width: "80%",
-    height: "68%",
+    height: "80%",
   },
   modalText: {
     color: "white",
