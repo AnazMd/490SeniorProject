@@ -42,7 +42,7 @@ export function MyMealsScreen() {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   const boxWidth = windowWidth * 0.885;
-  const boxHeight = windowHeight * 0.2425;
+  const boxHeight = windowHeight * 0.25;
 
   return (
     <SafeAreaView style={{
@@ -72,7 +72,7 @@ export function MyMealsScreen() {
           {recipes && recipes.map(recipe => (
             <TouchableOpacity key={recipe.id} onPress={() => setSelectedMeal(recipe.id)} style={{ 
               backgroundColor: "#AD40AF",
-              margin: 10,
+              margin: 5,
               alignItems: 'center', 
               justifyContent: 'center',
               borderRadius: 50,
@@ -80,7 +80,7 @@ export function MyMealsScreen() {
               height: boxHeight,
             }}>
                 <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100, borderRadius: 10 }} />
-                <Text style={[{fontSize: 18, fontWeight: 'bold'}, styles.textInfo]}>{recipe.title}</Text>
+                <Text style={[{fontSize: 18, fontWeight: 'bold'}, styles.textInfo]} numberOfLines={2}>{recipe.title}</Text>
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Calories: {recipe.calories}kcal</Text>
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Fat: {recipe.fat}</Text>
                 <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.carbs}</Text>
