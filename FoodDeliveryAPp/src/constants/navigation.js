@@ -8,4 +8,5 @@ export const SCREEN_NAMES = {
   Home: "Home",
   Ingredients: "Ingredients",
   Search: "Search",
+  Instacart: "Instacart",
 };
