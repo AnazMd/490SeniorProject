@@ -52,7 +52,7 @@ export function MyMealsScreen() {
       justifyContent: 'space-around',
       paddingHorizontal: 16,
     }}>
-      <Text style={{ fontSize: 48, fontWeight: 'bold', textAlign: 'center' }}>Daily Meals</Text>
+      <Text style={{ fontSize: Math.min(boxWidth / 5, boxHeight / 5), fontWeight: 'bold', textAlign: 'center' }}>Daily Meals</Text>
       
       {isLoading ? (
         // When loading
@@ -80,11 +80,11 @@ export function MyMealsScreen() {
               height: boxHeight,
             }}>
                 <Image source={{ uri: recipe.image }} style={{ width: 100, height: 100, borderRadius: 10 }} />
-                <Text style={[{fontSize: 18, fontWeight: 'bold'}, styles.textInfo]} numberOfLines={2}>{recipe.title}</Text>
-                <Text style={[{fontSize: 16}, styles.textInfo]}>Calories: {recipe.calories}kcal</Text>
-                <Text style={[{fontSize: 16}, styles.textInfo]}>Fat: {recipe.fat}</Text>
-                <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.carbs}</Text>
-                <Text style={[{fontSize: 16}, styles.textInfo]}>Protein: {recipe.protein}</Text>
+                <Text style={[{fontSize: Math.min(boxWidth / 12, boxHeight / 12), fontWeight: 'bold'}, styles.textInfo]} numberOfLines={2}>{recipe.title}</Text>
+                <Text style={[{fontSize: Math.min(boxWidth / 14, boxHeight / 14)}, styles.textInfo]}>Calories: {recipe.calories}kcal</Text>
+                <Text style={[{fontSize: Math.min(boxWidth / 14, boxHeight / 14)}, styles.textInfo]}>Fat: {recipe.fat}</Text>
+                <Text style={[{fontSize: Math.min(boxWidth / 14, boxHeight / 14)}, styles.textInfo]}>Carbs: {recipe.carbs}</Text>
+                <Text style={[{fontSize: Math.min(boxWidth / 14, boxHeight / 14)}, styles.textInfo]}>Protein: {recipe.protein}</Text>
             </TouchableOpacity>
           ))}  
 
