@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
-import {initializeApp,getApp }from "firebase/app";
-import {getAuth} from "firebase/auth";
+import { initializeApp, getApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -12,11 +13,12 @@ const firebaseConfig = {
   projectId: "meal-plan-app-59653",
   storageBucket: "meal-plan-app-59653.appspot.com",
   messagingSenderId: "425423528663",
-  appId: "1:425423528663:web:64a0efd1e3a287fdc68692"
+  appId: "1:425423528663:web:64a0efd1e3a287fdc68692",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getDatabase(app);
 
-export { auth };
+export { auth, db };

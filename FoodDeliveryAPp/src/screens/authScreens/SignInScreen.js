@@ -20,7 +20,8 @@ export function SignInScreen({ navigation }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigation.navigate("Home");
+        console.log(user);
+        navigation.navigate("Home", { user: user });
       }
     });
     return unsubscribe;
