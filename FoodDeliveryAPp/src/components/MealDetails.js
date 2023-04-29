@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { SafeAreaView, View, Text, Button, Image, ActivityIndicator, Modal, FlatList, StyleSheet } from "react-native";
+import { IngredientsContext } from './IngredientsContext';
 
-export function MealDetails({ mealId, closeModal/*, setSelectedMeal*/ }) {
+
+
+export function MealDetails({ mealId, closeModal, showInstacartButton/*, setSelectedMeal*/ }) {
   const [details, setDetails] = useState(null);
   const [instructions, setInstructions] = useState(null);
 
   // fetch image and ingredients
   const fetchIngredients = (mealId) => {
-    fetch(`https://api.spoonacular.com/recipes/${mealId}/information?includeNutrition=true&apiKey=b932a28a292846c3b80c7bd9475e4577`)
+    fetch(`https://api.spoonacular.com/recipes/${mealId}/information?includeNutrition=true&apiKey=ccc7636d8ca643b3aeaa0428a3e1efe9`)
       .then((response) => response.json())
       .then((data) => {
         setDetails(data);
@@ -21,7 +24,7 @@ export function MealDetails({ mealId, closeModal/*, setSelectedMeal*/ }) {
 
   useEffect(() => {
     const fetchInstructions = (mealId) => {
-      fetch(`https://api.spoonacular.com/recipes/${mealId}/analyzedInstructions?apiKey=b932a28a292846c3b80c7bd9475e4577`)
+      fetch(`https://api.spoonacular.com/recipes/${mealId}/analyzedInstructions?apiKey=ccc7636d8ca643b3aeaa0428a3e1efe9`)
         .then(response => response.json())
         .then(data => {
           setInstructions(data);
@@ -39,8 +42,21 @@ export function MealDetails({ mealId, closeModal/*, setSelectedMeal*/ }) {
     closeModal();
   };
 
+  const { addIngredients } = useContext(IngredientsContext);
+
+  const handlePrepareForInstacart = () => {
+    const ingredientsData = details.extendedIngredients.map(ingredient => ingredient.original);
+    console.log('Ingredients:', ingredientsData);
+    addIngredients(ingredientsData);
+  };
+
   if (!details) {
-    return <ActivityIndicator size="large" color="blue" />
+    return (
+      <SafeAreaView>
+        <ActivityIndicator size="large" color="blue" />
+        <Text style={styles.loadingText}>Loading...</Text>
+      </SafeAreaView>
+    )
   }
 
   return (
@@ -71,6 +87,14 @@ export function MealDetails({ mealId, closeModal/*, setSelectedMeal*/ }) {
                 data={instructions[0].steps}
                 keyExtractor={(i) => i.number}
                 renderItem={({ item }) => <Text style={[{fontSize: 16}, styles.modalText]}>-{item.step}</Text>}
+              />
+            )}
+
+            {showInstacartButton && (
+              <Button
+                title="Prepare for Instacart"
+                color="#00FFFF"
+                onPress={handlePrepareForInstacart}
               />
             )}
 
