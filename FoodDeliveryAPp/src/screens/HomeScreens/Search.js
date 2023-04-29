@@ -34,7 +34,7 @@ export function Search(){
   const handleSearch = (query) => {
     setIsLoading(true);
     setSearchClicked(true);
-    fetch(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&addRecipeNutrition=true&instructionsRequired=true&number=5&query=${query}&apiKey=b932a28a292846c3b80c7bd9475e4577`)
+    fetch(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&addRecipeNutrition=true&instructionsRequired=true&number=5&query=${query}&apiKey=ccc7636d8ca643b3aeaa0428a3e1efe9`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -123,7 +123,7 @@ export function Search(){
               ))}
 
               {selectedMeal && (
-                <MealDetails mealId={selectedMeal} closeModal={closeModal} />
+                <MealDetails mealId={selectedMeal} closeModal={closeModal} showInstacartButton={false}/>
               )}
             </View>
           ) : (

@@ -17,7 +17,7 @@ export function MyMealsScreen() {
   // Anaz: e095e14b3aba4f8a86d65bbbec9d5258
   // Extra: ad6b49472d7e4267891b4a52dcc07a2c
   const fetchRecipes = () => {
-    fetch(`https://api.spoonacular.com/recipes/findByNutrients?number=3&random=true&minCalories=0&apiKey=b932a28a292846c3b80c7bd9475e4577`)
+    fetch(`https://api.spoonacular.com/recipes/findByNutrients?number=3&random=true&minCalories=0&apiKey=ccc7636d8ca643b3aeaa0428a3e1efe9`)
       .then(response => response.json())
       .then(data => {
         setRecipes(data);
@@ -89,7 +89,7 @@ export function MyMealsScreen() {
           ))}  
 
           {selectedMeal && (
-            <MealDetails mealId={selectedMeal} closeModal={closeModal}/>
+            <MealDetails mealId={selectedMeal} closeModal={closeModal} showInstacartButton={true}/>
           )}
 
         </View>
