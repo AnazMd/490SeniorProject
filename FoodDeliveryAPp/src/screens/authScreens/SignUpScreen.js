@@ -20,9 +20,7 @@ export function SignUpScreen({ navigation }) {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        navigation.navigate("FormFillIn", {
-          userid: user.uid,
-        });
+        navigation.navigate("FormFillIn", { user: user, userid: user.uid });
         console.log("uid: ", user.uid);
         // ...
       })
