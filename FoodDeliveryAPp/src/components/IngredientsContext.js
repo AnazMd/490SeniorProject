@@ -9,8 +9,8 @@ export const IngredientsProvider = ({ children }) => {
     setIngredients((prevIngredients) => [...prevIngredients, ...newIngredients]);
   };
 
-  const clearIngredients = () => {
-    setIngredients([]);
+  const clearIngredients = (updatedIngredients) => {
+    setIngredients(updatedIngredients);
   };
 
   return (

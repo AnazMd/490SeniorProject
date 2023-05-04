@@ -52,7 +52,7 @@ export function MyMealsScreen() {
       justifyContent: 'space-around',
       paddingHorizontal: 16,
     }}>
-      <Text style={{ fontSize: Math.min(boxWidth / 5, boxHeight / 5), fontWeight: 'bold', textAlign: 'center' }}>Daily Meals</Text>
+      <Text style={{ fontSize: Math.min(boxWidth / 6, boxHeight / 6), fontWeight: 'bold', textAlign: 'center' }}>Daily Meals</Text>
       
       {isLoading ? (
         // When loading
