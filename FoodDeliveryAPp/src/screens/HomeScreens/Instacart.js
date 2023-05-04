@@ -9,6 +9,11 @@ import { IngredientsContext } from '../../components/IngredientsContext';
 export function Instacart () {
   const { ingredients, clearIngredients } = useContext(IngredientsContext);
 
+  const handleRemoveIngredient = (index) => {
+    const updatedIngredients = ingredients.filter((_, i) => i !== index);
+    clearIngredients(updatedIngredients);
+  };
+
   const handleClearIngredients = () => {
     clearIngredients([]);
   };
@@ -18,16 +23,17 @@ export function Instacart () {
       <Text style={styles.title}>Instacart Tab</Text>
       <Text style={styles.subtitle}>Ingredients:</Text>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.ingredientsContainer}>
-          {ingredients.map((ingredient, index) => (
-            <Text key={index} style={styles.ingredient}>
-              {ingredient}
-            </Text>
-          ))}
-        </View>
+        {ingredients.map((ingredient, index) => (
+          <TouchableOpacity style={styles.ingredientsContainer}>
+              <Text key={index} style={styles.ingredient}>
+                {ingredient}
+              </Text> 
+              <Button title="Remove" color="#00FFFF" onPress={() => handleRemoveIngredient(index)}></Button>   
+          </TouchableOpacity>
+        ))}
       </ScrollView>
       <View style={styles.buttonContainer}>
-        <Button title="Clear Ingredients" color="blue" onPress={handleClearIngredients} /> 
+        <Button title="Remove All Ingredients" color="blue" onPress={handleClearIngredients} /> 
       </View>
         </SafeAreaView>
   )
@@ -40,27 +46,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 10,
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: 24,
     marginBottom: 5,
   },
   scrollContainer: {
     flexGrow: 1,
     paddingTop: 20,
     paddingHorizontal: 16,
-    justifyContent: "flex-start",
+    marginTop: 10,
+    justifyContent: "center",
     alignItems: "center",
   },
   ingredientsContainer: {
-    marginTop: 10,
+    fontSize: 16,
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 10,
+    backgroundColor: '#AD40AF',
+    width: '100%',
   },
   ingredient: {
-    fontSize: 16,
-    marginBottom: 5,
+    fontSize: 18,
+    color: 'white',
   },
   buttonContainer: {
     padding: 10,

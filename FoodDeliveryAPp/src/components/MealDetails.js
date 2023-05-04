@@ -45,7 +45,7 @@ export function MealDetails({ mealId, closeModal, showInstacartButton/*, setSele
   const { addIngredients } = useContext(IngredientsContext);
 
   const handlePrepareForInstacart = () => {
-    const ingredientsData = details.extendedIngredients.map(ingredient => ingredient.original);
+    const ingredientsData = details.extendedIngredients.map(ingredient => ingredient.originalName);
     console.log('Ingredients:', ingredientsData);
     addIngredients(ingredientsData);
   };
