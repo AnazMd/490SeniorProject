@@ -92,7 +92,7 @@ export function MealDetails({ mealId, closeModal, showInstacartButton/*, setSele
 
             {showInstacartButton && (
               <Button
-                title="Prepare for Instacart"
+                title="Prepare For Instacart"
                 color="#00FFFF"
                 onPress={handlePrepareForInstacart}
               />

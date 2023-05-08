@@ -38,9 +38,9 @@ export function HomeScreen({ route }) {
         
         <Tabs.Screen name={SCREEN_NAMES.Search} component={Search} />
         <Tabs.Screen name={SCREEN_NAMES.Instacart} component={Instacart} />
-        <Tabs.Screen name={SCREEN_NAMES.RecipesScreen}>
+        {/*<Tabs.Screen name={SCREEN_NAMES.RecipesScreen}>
         {(props) => <RecipesScreen {...props} user={user} />}
-          </Tabs.Screen>
+          </Tabs.Screen> // Commented out recipes screen. The rest after this line was already commented out
         {/* <Tabs.Screen name={SCREEN_NAMES.Recipes} component={RecipesScreen}/>
               <Tabs.Screen name={SCREEN_NAMES.Ingredients} component={IngredientsScreen}/> */}
       </Tabs.Navigator>

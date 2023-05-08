@@ -51,7 +51,7 @@ export function ProfileScreen({ navigation, user }) {
           {userData ? (
             <View>
               <Text>Name: {userData.username}</Text>
-              <Text>Email: {userData.user_age}</Text>
+              <Text>Age: {userData.user_age}</Text>
               {/* display other user data */}
             </View>
           ) : (
