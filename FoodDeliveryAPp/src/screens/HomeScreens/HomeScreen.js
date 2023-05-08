@@ -16,9 +16,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ProfileScreen } from "./ProfileScreen";
 import { IngredientsScreen } from "./IngredientsScreen";
 import { MyMealsScreen } from "./MyMealsScreen";
-import { RecipesScreen } from "./RecipesScreen";
 import { Search } from "./Search";
 import { Instacart } from "./Instacart";
+import { RecipesScreen } from "./RecipesScreen";
+
 import { IngredientsProvider } from '../../components/IngredientsContext';
 
 const Tabs = createBottomTabNavigator();
@@ -31,9 +32,15 @@ export function HomeScreen({ route }) {
         <Tabs.Screen name={SCREEN_NAMES.Profile}>
           {(props) => <ProfileScreen {...props} user={user} />}
         </Tabs.Screen>
-        <Tabs.Screen name={SCREEN_NAMES.MyMeals} component={MyMealsScreen} />
+        <Tabs.Screen name={SCREEN_NAMES.MyMeals}>
+          {(props) => <MyMealsScreen {...props} user={user} />}
+        </Tabs.Screen>
+        
         <Tabs.Screen name={SCREEN_NAMES.Search} component={Search} />
         <Tabs.Screen name={SCREEN_NAMES.Instacart} component={Instacart} />
+        <Tabs.Screen name={SCREEN_NAMES.RecipesScreen}>
+        {(props) => <RecipesScreen {...props} user={user} />}
+          </Tabs.Screen>
         {/* <Tabs.Screen name={SCREEN_NAMES.Recipes} component={RecipesScreen}/>
               <Tabs.Screen name={SCREEN_NAMES.Ingredients} component={IngredientsScreen}/> */}
       </Tabs.Navigator>
