@@ -28,6 +28,7 @@ export function Stats( {userData} ){
       <Image
         style={styles.avatar}
         // source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }}
+        source={require('/Github_Projects/490SeniorProject/FoodDeliveryAPp/vecteezy_profile-icon-design-vector_5544718.jpg')}
         
       />
       
@@ -37,8 +38,8 @@ export function Stats( {userData} ){
               <View>
               {userData ? (
                 <View>
-                  <Text>Name: {userData.username}</Text>
-                  <Text>Age: {userData.user_preference}</Text>
+                  <Text style={{fontSize:'17px', fontWeight:'light'}}>{userData.username}</Text>
+                  {/* <Text>Age: {userData.user_age}</Text> */}
                   {/* display other user data */}
                 </View>
               ) : (
@@ -144,12 +145,12 @@ const styles = StyleSheet.create({
   },
 
   personInfo: {
-    marginTop: 40,
+    marginTop: 30,
     height: 45,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
+    // marginBottom: 20,
     width: 250,
     borderRadius: 30,
     marginLeft: 70
