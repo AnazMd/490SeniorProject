@@ -34,6 +34,11 @@ export function MyMealsScreen({ userData }) {
     let apiUrl;
     let apiKey = "d1209f9a7f2d4a718c85eab8cc079052";
     if (diet === "Vegan" || diet === "Vegetarian") {
+      
+      //confirming it works
+      //console.log(diet, userData.user_weight)
+      
+      
       apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&addRecipeNutrition=true&number=3&sort=random&diet=${diet}`;
     } else {
       apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&addRecipeNutrition=true&number=3&sort=random`;

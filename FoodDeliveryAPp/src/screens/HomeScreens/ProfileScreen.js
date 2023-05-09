@@ -6,6 +6,7 @@ import {
   Button,
   ScrollView,
   SafeAreaView,
+  TouchableOpacity
 } from "react-native";
 import { colors, parameters, title } from "../../constants/styles";
 import { Icon } from "react-native-elements/dist/icons/Icon";
@@ -22,6 +23,7 @@ const ListItem = ({ name }) => {
   );
 };
 export function ProfileScreen({ navigation, userData }) {
+  
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -29,6 +31,8 @@ export function ProfileScreen({ navigation, userData }) {
       })
       .catch((error) => alert(error.message));
   };
+
+
   return (
     <Screen>
       <View style={{ flex: 1, alignItems: "center", marginTop: 50 }}>
@@ -47,7 +51,7 @@ export function ProfileScreen({ navigation, userData }) {
       </View>
 
       <View style={styles.wrapper}>
-        {/* This will show the list options on the profile screen*/}
+        {/* This will show the list options on the profile screen */}
         <View style={styles.items}>
           {/* <Text style={styles.circleText}> Testing Place </Text> */}
           <ProfileLists text={"Profile"} />
@@ -129,4 +133,34 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 20,
   },
+
+  buttonContainer: {
+    marginTop: 10,
+    height: 45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    width: 250,
+    borderRadius: 30,
+    backgroundColor: '#AD40AF',
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10
+  },
+
+  header: {
+    backgroundColor: '#AD40AF',
+    height: 200,
+  },
+
 });
+
