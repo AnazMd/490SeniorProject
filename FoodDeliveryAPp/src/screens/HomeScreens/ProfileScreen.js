@@ -13,6 +13,7 @@ import { Icon } from "react-native-elements/dist/icons/Icon";
 import { SCREEN_NAMES } from "../../constants/navigation";
 import { Screen } from "../../components/layout/Screen";
 import { signOut } from "firebase/auth";
+import { auth } from "../../../firebase"
 import ProfileLists from "../../components/ProfileLists";
 
 const ListItem = ({ name }) => {

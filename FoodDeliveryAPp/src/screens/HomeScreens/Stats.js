@@ -5,6 +5,8 @@ import { SCREEN_NAMES } from "../../constants/navigation";
 
 import { Screen } from "../../components/layout/Screen";
 import { signOut } from "firebase/auth";
+import { auth } from "../../../firebase"
+
 import ProfileLists from "../../components/ProfileLists";
 
 export function Stats( {userData} ){
