@@ -21,15 +21,14 @@ import { Instacart } from "./Instacart";
 import { RecipesScreen } from "./RecipesScreen";
 import { db } from "../../../firebase";
 import { ref, onValue, off } from "firebase/database";
-
+import { useSelector } from "react-redux";
 import { IngredientsProvider } from "../../components/IngredientsContext";
-
 
 import { Stats } from "./Stats";
 
 const Tabs = createBottomTabNavigator();
 
-export function HomeScreen({ route }) {
+export function HomeScreen({ navigation, route }) {
   const { user } = route.params;
   const [userData, setUserData] = useState(null);
 
@@ -39,9 +38,12 @@ export function HomeScreen({ route }) {
     onValue(userRef, (snapshot) => {
       setUserData(snapshot.val());
     });
-    console.log(userData);
     return () => off(userRef);
   }, [user]);
+
+  useEffect(() => {
+    console.log("userData: ", userData);
+  }, [userData]);
 
   return (
     <IngredientsProvider>
@@ -57,8 +59,7 @@ export function HomeScreen({ route }) {
 
         <Tabs.Screen name={SCREEN_NAMES.Stats}>
           {(props) => <Stats {...props} userData={userData} />}
-          </Tabs.Screen>
-
+        </Tabs.Screen>
 
         {/*<Tabs.Screen name={SCREEN_NAMES.RecipesScreen}>
         {(props) => <RecipesScreen {...props} user={user} />}

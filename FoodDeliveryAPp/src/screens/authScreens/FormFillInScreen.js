@@ -1,30 +1,49 @@
 import React, { useState } from "react";
+import { TextInput, Button } from "react-native-paper";
 import {
   StyleSheet,
   Text,
   SafeAreaView,
   ScrollView,
-  StatusBar,
-  TextInput,
   TouchableOpacity,
   View,
+  Alert,
 } from "react-native";
-import { Formik } from "formik";
 import { RadioButton } from "../../components/RadioButton";
 import { getDatabase, ref, set } from "firebase/database";
 
 export function FormFillInScreen({ navigation, route }) {
-  const { user, userid } = route.params;
+  const { userid } = route.params;
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
-  const [height, setHeight] = useState("");
   const [feet, setFeet] = useState("");
   const [inches, setInches] = useState("");
   const [weight, setWeight] = useState("");
   const [exerciseLevel, setExerciseLevel] = useState("");
   const [goal, setGoal] = useState("");
   const [preference, setPreference] = useState("");
-  const handleSubmit = () => {
+
+  const validateForm = () => {
+    if (
+      !name ||
+      !age ||
+      !feet ||
+      !inches ||
+      !weight ||
+      !exerciseLevel ||
+      !goal ||
+      !preference
+    ) {
+      Alert.alert("Error", "Please fill in all fields.");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
+
+    const height = parseInt(feet) * 12 + parseInt(inches);
     let User = {
       user_name: name,
       user_age: age,
@@ -35,9 +54,10 @@ export function FormFillInScreen({ navigation, route }) {
       user_preference: preference,
       user_id: userid,
     };
-    writeUserData(User);
-    navigation.navigate("Home", { user: user });
+    await writeUserData(User);
+    navigation.navigate("Home");
   };
+
   function writeUserData(user) {
     const db = getDatabase();
     set(ref(db, "users/" + user.user_id), {
@@ -52,64 +72,69 @@ export function FormFillInScreen({ navigation, route }) {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
       <ScrollView
         contentContainerStyle={{
+          paddingHorizontal: 20,
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <View style={{ alignItems: "center" }}>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Name:</Text>
+        <View style={styles.inputWrapper}>
+          <Text style={styles.label}>Name:</Text>
+          <TextInput
+            mode="outlined"
+            label="Enter Your Name"
+            value={name}
+            onChangeText={(text) => setName(text)}
+            style={styles.textInput}
+          />
+        </View>
+        <View style={styles.inputWrapper}>
+          <Text style={styles.label}>Age:</Text>
+          <TextInput
+            mode="outlined"
+            label="Enter Your Age"
+            value={age}
+            onChangeText={(text) => setAge(text)}
+            keyboardType="number-pad"
+            style={styles.textInput}
+          />
+        </View>
+        <View style={styles.inputWrapper}>
+          <Text style={styles.label}>Height:</Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
             <TextInput
-              placeholder="Enter Your Name"
-              placeholderTextColor="003f5c"
-              value={name}
-              onChangeText={(text) => setName(text)}
-              style={styles.textInput}
+              mode="outlined"
+              label="Ft"
+              value={feet}
+              onChangeText={(text) => setFeet(text)}
+              keyboardType="number-pad"
+              style={styles.heightInput}
             />
-          </View>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Age:</Text>
+            <Text>ft</Text>
             <TextInput
-              placeholder="Enter Your Age"
-              placeholderTextColor="003f5c"
-              value={age}
-              onChangeText={(text) => setAge(text)}
-              style={styles.textInput}
+              mode="outlined"
+              label="In"
+              value={inches}
+              onChangeText={(text) => setInches(text)}
+              keyboardType="number-pad"
+              style={styles.heightInput}
             />
+            <Text>in</Text>
           </View>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Height:</Text>
-            <TextInput
-              placeholder="Height (Ft In)"
-              placeholderTextColor="003f5c"
-              value={height}
-              onChangeText={(text) => setHeight(text)}
-              style={styles.textInput}
-            />
-            {/* <Text>ft</Text>
-                        <TextInput
-                        placeholder="Inches"
-                        placeholderTextColor = "003f5c"
-                        value = {inches}
-                        onChangeText={text => setInches(text)}
-                        style={styles.textInput}
-                        />
-                        <Text>in</Text> */}
-          </View>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Weight:</Text>
-            <TextInput
-              placeholder="Weight"
-              placeholderTextColor="003f5c"
-              value={weight}
-              onChangeText={(text) => setWeight(text)}
-              style={styles.textInput}
-            />
-            <Text>lbs</Text>
-          </View>
+        </View>
+        <View style={styles.inputWrapper}>
+          <Text style={styles.label}>Weight:</Text>
+          <TextInput
+            mode="outlined"
+            label="Weight"
+            value={weight}
+            onChangeText={(text) => setWeight(text)}
+            keyboardType="number-pad"
+            style={styles.weightInput}
+          />
+          <Text>lbs</Text>
         </View>
 
         <View
@@ -135,11 +160,15 @@ export function FormFillInScreen({ navigation, route }) {
             val={preference}
             changeVal={setPreference}
             header={"Any Food Preferences?"}
-            labels={["Vegan", "Vegetarian"]}
+            labels={["Vegan", "Vegetarian", "None"]}
           />
-          <TouchableOpacity style={styles.submitBtn} onPress={handleSubmit}>
-            <Text>Submit</Text>
-          </TouchableOpacity>
+          <Button
+            mode="contained"
+            onPress={handleSubmit}
+            style={styles.submitBtn}
+          >
+            Submit
+          </Button>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -148,20 +177,28 @@ export function FormFillInScreen({ navigation, route }) {
 
 const styles = StyleSheet.create({
   textInput: {
-    borderColor: "black",
-    borderWidth: 1,
-    padding: 5,
-    marginHorizontal: 10,
-    fontSize: 25,
+    width: 200,
+    marginBottom: 12,
+  },
+  heightInput: {
+    width: 50,
+    marginBottom: 12,
+    marginRight: 10,
+  },
+  weightInput: {
+    width: 100,
+    marginBottom: 12,
+    marginRight: 10,
   },
   inputWrapper: {
     flexDirection: "row",
-    margin: 50,
+    margin: 20,
     alignItems: "center",
   },
   label: {
     fontWeight: "500",
     fontSize: 25,
+    marginRight: 10,
   },
   submitBtn: {
     width: 100,
@@ -169,7 +206,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: "lightgray",
   },
 });
 
