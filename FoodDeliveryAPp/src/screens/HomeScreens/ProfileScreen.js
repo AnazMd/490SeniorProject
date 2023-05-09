@@ -12,8 +12,6 @@ import { Icon } from "react-native-elements/dist/icons/Icon";
 import { SCREEN_NAMES } from "../../constants/navigation";
 import { Screen } from "../../components/layout/Screen";
 import { signOut } from "firebase/auth";
-import { auth, db } from "../../../firebase";
-import { ref, onValue, off } from "firebase/database";
 import ProfileLists from "../../components/ProfileLists";
 
 const ListItem = ({ name }) => {
@@ -23,19 +21,7 @@ const ListItem = ({ name }) => {
     </View>
   );
 };
-export function ProfileScreen({ navigation, user }) {
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-    const userRef = ref(db, `users/${user.uid}`);
-
-    onValue(userRef, (snapshot) => {
-      setUserData(snapshot.val());
-    });
-    console.log(userData);
-    return () => off(userRef);
-  }, [user]);
-
+export function ProfileScreen({ navigation, userData }) {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -51,7 +37,7 @@ export function ProfileScreen({ navigation, user }) {
           {userData ? (
             <View>
               <Text>Name: {userData.username}</Text>
-              <Text>Age: {userData.user_age}</Text>
+              <Text>Age: {userData.user_preference}</Text>
               {/* display other user data */}
             </View>
           ) : (

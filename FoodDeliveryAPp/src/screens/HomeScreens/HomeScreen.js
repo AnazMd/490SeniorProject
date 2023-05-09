@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -19,23 +19,36 @@ import { MyMealsScreen } from "./MyMealsScreen";
 import { Search } from "./Search";
 import { Instacart } from "./Instacart";
 import { RecipesScreen } from "./RecipesScreen";
+import { db } from "../../../firebase";
+import { ref, onValue, off } from "firebase/database";
 
-import { IngredientsProvider } from '../../components/IngredientsContext';
+import { IngredientsProvider } from "../../components/IngredientsContext";
 
 const Tabs = createBottomTabNavigator();
 
 export function HomeScreen({ route }) {
   const { user } = route.params;
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const userRef = ref(db, `users/${user.uid}`);
+
+    onValue(userRef, (snapshot) => {
+      setUserData(snapshot.val());
+    });
+    console.log(userData);
+    return () => off(userRef);
+  }, [user]);
+
   return (
     <IngredientsProvider>
       <Tabs.Navigator screenOptions={{ headerShown: false }}>
         <Tabs.Screen name={SCREEN_NAMES.Profile}>
-          {(props) => <ProfileScreen {...props} user={user} />}
+          {(props) => <ProfileScreen {...props} userData={userData} />}
         </Tabs.Screen>
         <Tabs.Screen name={SCREEN_NAMES.MyMeals}>
-          {(props) => <MyMealsScreen {...props} user={user} />}
+          {(props) => <MyMealsScreen {...props} userData={userData} />}
         </Tabs.Screen>
-        
         <Tabs.Screen name={SCREEN_NAMES.Search} component={Search} />
         <Tabs.Screen name={SCREEN_NAMES.Instacart} component={Instacart} />
         {/*<Tabs.Screen name={SCREEN_NAMES.RecipesScreen}>
