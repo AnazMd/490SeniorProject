@@ -24,8 +24,6 @@ import { ref, onValue, off } from "firebase/database";
 import { useSelector } from "react-redux";
 import { IngredientsProvider } from "../../components/IngredientsContext";
 
-import { Stats } from "./Stats";
-
 const Tabs = createBottomTabNavigator();
 
 export function HomeScreen({ navigation, route }) {
@@ -56,10 +54,6 @@ export function HomeScreen({ navigation, route }) {
         </Tabs.Screen>
         <Tabs.Screen name={SCREEN_NAMES.Search} component={Search} />
         <Tabs.Screen name={SCREEN_NAMES.Instacart} component={Instacart} />
-
-        <Tabs.Screen name={SCREEN_NAMES.Stats}>
-          {(props) => <Stats {...props} userData={userData} />}
-        </Tabs.Screen>
 
         {/*<Tabs.Screen name={SCREEN_NAMES.RecipesScreen}>
         {(props) => <RecipesScreen {...props} user={user} />}
