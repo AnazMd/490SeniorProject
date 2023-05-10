@@ -39,10 +39,10 @@ export function FormFillInScreen({ navigation, route }) {
     }
 
     if (
-      parseInt(feet) < 0 ||
+      parseInt(feet) < 1 ||
       parseInt(inches) < 0 ||
       parseInt(feet) > 8 ||
-      parseInt(inches) > 12
+      parseInt(inches) > 11
     ) {
       Alert.alert("Error", "Invalid Height");
       return false;
@@ -50,6 +50,11 @@ export function FormFillInScreen({ navigation, route }) {
 
     if (parseInt(weight) < 0) {
       Alert.alert("Error", "Invalid Weight");
+      return false;
+    }
+
+    if (parseInt(age) < 4) {
+      Alert.alert("Error", "Invalid Age");
       return false;
     }
 

@@ -1,17 +1,21 @@
-
-import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native'
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import { SCREEN_NAMES } from "../../constants/navigation";
 
 import { Screen } from "../../components/layout/Screen";
 import { signOut } from "firebase/auth";
-import { auth } from "../../../firebase"
+import { auth } from "../../../firebase";
 
 import ProfileLists from "../../components/ProfileLists";
 
-export function Stats( {userData} ){
-
-
+export function Stats({ userData }) {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -20,57 +24,52 @@ export function Stats( {userData} ){
       .catch((error) => alert(error.message));
   };
 
-  console.log(userData.username)
-  
+  console.log(userData.username);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}></View>
       <Image
         style={styles.avatar}
-        source={require('/Github_Projects/490SeniorProject/FoodDeliveryAPp/vecteezy_profile-icon-design-vector_5544718.jpg')}
-        
+        source={require("../../../assets/vecteezy_profile-icon-design-vector_5544718.jpg")}
       />
-      
-      
-      <View style={styles.body}>
-      <View style={styles.personInfo}>
-              <View>
-              {userData ? (
-                <View>
-                  <Text style={{fontSize:'17px', fontWeight:'light'}}>{userData.username}</Text>
-                  {/* <Text>Age: {userData.user_age}</Text> */}
-                  {/* display other user data */}
-                </View>
-              ) : (
-                <Text>Loading user data...</Text>
-              )}
-            </View>
-          </View>
-        <View style={styles.bodyContent}>
-          
 
+      <View style={styles.body}>
+        <View style={styles.personInfo}>
+          <View>
+            {userData ? (
+              <View>
+                <Text style={{ fontSize: "17px", fontWeight: "light" }}>
+                  {userData.username}
+                </Text>
+                {/* <Text>Age: {userData.user_age}</Text> */}
+                {/* display other user data */}
+              </View>
+            ) : (
+              <Text>Loading user data...</Text>
+            )}
+          </View>
+        </View>
+        <View style={styles.bodyContent}>
           <TouchableOpacity style={styles.buttonContainer}>
-            <Text style={{fontWeight:'bold'}}>Stats</Text>
+            <Text style={{ fontWeight: "bold" }}>Stats</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonContainer}>
-            <Text style={{fontWeight:'bold'}}>Random text soon</Text>
+            <Text style={{ fontWeight: "bold" }}>Random text soon</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.buttonContainerLogOut}>
-              <Button title="Logout" color="red" onPress={handleSignOut}></Button>
+            <Button title="Logout" color="red" onPress={handleSignOut}></Button>
           </TouchableOpacity>
-
-
         </View>
       </View>
     </View>
-    
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#AD40AF',
+    backgroundColor: "#AD40AF",
     height: 200,
   },
   avatar: {
@@ -78,59 +77,59 @@ const styles = StyleSheet.create({
     height: 130,
     borderRadius: 63,
     borderWidth: 4,
-    borderColor: 'white',
+    borderColor: "white",
     marginBottom: 10,
-    alignSelf: 'center',
-    position: 'absolute',
+    alignSelf: "center",
+    position: "absolute",
     marginTop: 130,
   },
   name: {
     fontSize: 22,
-    color: '#FFFFFF',
-    fontWeight: '600',
+    color: "#FFFFFF",
+    fontWeight: "600",
   },
   body: {
     marginTop: 40,
   },
   bodyContent: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     padding: 30,
   },
   name: {
     fontSize: 28,
-    color: '#696969',
-    fontWeight: '600',
+    color: "#696969",
+    fontWeight: "600",
   },
   info: {
     fontSize: 16,
-    color: '#00BFFF',
+    color: "#00BFFF",
     marginTop: 10,
   },
   description: {
     fontSize: 16,
-    color: '#696969',
+    color: "#696969",
     marginTop: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
   buttonContainer: {
     marginTop: 10,
     height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 20,
     width: 250,
     borderRadius: 30,
-    backgroundColor: '#AD40AF',
+    backgroundColor: "#AD40AF",
   },
 
   buttonContainerLogOut: {
     marginTop: 10,
     height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 20,
     width: 250,
     borderRadius: 30,
@@ -139,12 +138,12 @@ const styles = StyleSheet.create({
   personInfo: {
     marginTop: 30,
     height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     // marginBottom: 20,
     width: 250,
     borderRadius: 30,
-    marginLeft: 70
+    marginLeft: 70,
   },
-})
+});
