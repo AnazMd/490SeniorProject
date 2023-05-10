@@ -72,25 +72,25 @@ export function ProfileScreen({ navigation, userData }) {
             {userData ? (
               <>
                 <View style={styles.buttonContainer}>
-                  <Text style={{ fontWeight: "bold" }}>
+                  <Text style={{ fontWeight: "bold", color:'white' }}>
                     Weight: {userData.user_weight}lbs
                   </Text>
                 </View>
 
                 <View style={styles.buttonContainer}>
-                  <Text style={{ fontWeight: "bold" }}>
+                  <Text style={{ fontWeight: "bold", color:'white' }}>
                     Height: {real_height}
                   </Text>
                 </View>
 
                 <View style={styles.buttonContainer}>
-                  <Text style={{ fontWeight: "bold" }}>
+                  <Text style={{ fontWeight: "bold", color:'white' }}>
                     Preference: {userData.user_preference}
                   </Text>
                 </View>
 
                 <View style={styles.buttonContainer}>
-                  <Text style={{ fontWeight: "bold" }}>
+                  <Text style={{ fontWeight: "bold", color:'white' }}>
                     Goal: {userData.user_goal}
                   </Text>
                 </View>

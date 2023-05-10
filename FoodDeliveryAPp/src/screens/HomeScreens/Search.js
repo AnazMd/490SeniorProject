@@ -1,8 +1,22 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, TextInput, TouchableOpacity, Image, Button, ActivityIndicator, StyleSheet, Dimensions, ScrollView, Modal, TouchableWithoutFeedback } from 'react-native';
 import { MealDetails } from '../../components/MealDetails';
+import { SCREEN_NAMES } from "../../constants/navigation";
+import { Screen } from "../../components/layout/Screen";
 
-export function Search(){
+import { useNavigation } from '@react-navigation/native';
+
+
+let recipe_id = null;
+let title_x = null;
+let protein_x = null;
+let carb_x = null;
+let fat_x = null;
+let image_x = null;
+
+
+
+export function Search( {navigation} ){
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -10,13 +24,35 @@ export function Search(){
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const openModal = () => {
+  // const navigation = useNavigation();
+
+  //Cisco, the logic is right here
+  const handleButtonPress = () => {
+    const title = `some title ${recipe_id}`; // replace with the current text information
+    navigation.navigate('Favorites', { title_x, protein_x, image_x, carb_x, fat_x });
+    console.log('PRESSED')
+  };
+
+  const openModal = (title, protein, carb, fat, image) => {
+    // console.log('HERES ID', id)
+    // recipe_id = id
+    title_x = title
+    protein_x = protein
+    image_x = image
+    carb_x = carb
+    fat_x = fat
+
     setModalVisible(true);
   };
 
   const shutModal = () => {
     setModalVisible(false);
   };
+
+  const handleAndShut = () => {
+    shutModal()
+    handleButtonPress()
+  }
  
   {/*}
   const handleSearch = (query) => {
@@ -113,8 +149,10 @@ export function Search(){
                   <Text style={[{fontSize: 16}, styles.textInfo]}>Carbs: {recipe.nutrientAmounts["Carbohydrates"]} g</Text>
                   <Text style={[{fontSize: 16}, styles.textInfo]}>Protein: {recipe.nutrientAmounts["Protein"]} g</Text>
                   {/* a popup to replace the meals */}
-                  <TouchableWithoutFeedback onPress={openModal}>
-                    <Text style={[{fontSize: 18, color: "#00FFFF"}]}>Replace Meal</Text>
+                  {/* PASS IN SPECIFIC RECIPE ID FOR **FAVORITES.JS** */}
+                  <TouchableWithoutFeedback onPress={() => openModal(recipe.title, recipe.nutrientAmounts["Protein"], recipe.nutrientAmounts["Carbohydrates"],
+                  recipe.nutrientAmounts["Fat"], recipe.image)}>
+                    <Text style={[{fontSize: 18, color: "#00FFFF"}]}>Favorite Meal</Text>
                   </TouchableWithoutFeedback>
                   {/* Below is the Modal */}
                   
@@ -138,8 +176,8 @@ export function Search(){
       <Modal visible={modalVisible} transparent={true} onRequestClose={shutModal}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Replace Meal</Text>
-            <Button title="Replace" color={"#00FFFF"}/>
+            <Text style={styles.modalText}>Click to Favorite Meal Below</Text>
+            <Button title="Favorite" color={"#00FFFF"} onPress={handleAndShut}/>
             <Button title="Cancel" color={"#00FFFF"} onPress={shutModal} />
           </View>
         </View>

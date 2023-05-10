@@ -18,6 +18,7 @@ import { IngredientsScreen } from "./IngredientsScreen";
 import { MyMealsScreen } from "./MyMealsScreen";
 import { Search } from "./Search";
 import { Instacart } from "./Instacart";
+import { Favorites } from "./Favorites";
 import { RecipesScreen } from "./RecipesScreen";
 import { db } from "../../../firebase";
 import { ref, onValue, off } from "firebase/database";
@@ -54,6 +55,7 @@ export function HomeScreen({ navigation, route }) {
         </Tabs.Screen>
         <Tabs.Screen name={SCREEN_NAMES.Search} component={Search} />
         <Tabs.Screen name={SCREEN_NAMES.Instacart} component={Instacart} />
+        <Tabs.Screen name={SCREEN_NAMES.Favorites} component={Favorites} />
 
         {/*<Tabs.Screen name={SCREEN_NAMES.RecipesScreen}>
         {(props) => <RecipesScreen {...props} user={user} />}

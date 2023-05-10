@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { FormFillInScreen } from "./src/screens/authScreens/FormFillInScreen";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { Favorites } from "./src/screens/HomeScreens/Favorites";
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +65,11 @@ function App() {
             name={SCREEN_NAMES.FormFillIn}
             component={FormFillInScreen}
           />
+
+          {/* <Stack.Screen
+            name={SCREEN_NAMES.Favorites}
+            component={Favorites}
+          /> */}
           <Stack.Screen
             name={SCREEN_NAMES.Home}
             component={HomeScreen}

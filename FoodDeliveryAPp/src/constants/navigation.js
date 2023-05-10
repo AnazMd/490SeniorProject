@@ -9,5 +9,5 @@ export const SCREEN_NAMES = {
   Ingredients: "Ingredients",
   Search: "Search",
   Instacart: "Instacart",
-  RecipesScreen: "RecipeScreen",
+  Favorites: "Favorites",
 };
