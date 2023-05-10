@@ -332,15 +332,7 @@ export function MyMealsScreen({ userData }) {
   };
 
   useEffect(() => {
-    if (
-      userData &&
-      userData.user_preference &&
-      userData.user_age &&
-      userData.user_weight &&
-      userData.user_height &&
-      userData.user_goal
-    ) {
-      setIsLoading(true);
+    setIsLoading(true);
       fetchRecipes(
         userData.user_preference,
         userData.user_age,
@@ -348,19 +340,20 @@ export function MyMealsScreen({ userData }) {
         userData.user_height,
         userData.user_goal
       );
-    }
-    //if (userData && userData.user_preference) {Statements above go in here}
+    /*if ( // stuck on loading for cisco
+      userData &&
+      userData.user_preference &&
+      userData.user_age &&
+      userData.user_weight &&
+      userData.user_height &&
+      userData.user_goal
+    ) {
+      {Statements above go in here}
+    }*/
   }, [userData]);
+
   const generateMeals = () => {
-    if (
-      userData &&
-      userData.user_preference &&
-      userData.user_age &&
-      userData.user_weight &&
-      userData.user_height &&
-      userData.user_goal
-    ) {
-      setIsLoading(true);
+    setIsLoading(true);
       fetchRecipes(
         userData.user_preference,
         userData.user_age,
@@ -368,7 +361,16 @@ export function MyMealsScreen({ userData }) {
         userData.user_height,
         userData.user_goal
       );
-    }
+    /*if (
+      userData &&
+      userData.user_preference &&
+      userData.user_age &&
+      userData.user_weight &&
+      userData.user_height &&
+      userData.user_goal
+    ) {
+      {Statements above go in here}
+    }*/
   };
 
   const closeModal = () => {
