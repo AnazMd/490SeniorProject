@@ -37,6 +37,21 @@ export function FormFillInScreen({ navigation, route }) {
       Alert.alert("Error", "Please fill in all fields.");
       return false;
     }
+
+    if (
+      parseInt(feet) < 0 ||
+      parseInt(inches) < 0 ||
+      parseInt(feet) > 8 ||
+      parseInt(inches) > 12
+    ) {
+      Alert.alert("Error", "Invalid Height");
+      return false;
+    }
+
+    if (parseInt(weight) < 0) {
+      Alert.alert("Error", "Invalid Weight");
+    }
+
     return true;
   };
 
