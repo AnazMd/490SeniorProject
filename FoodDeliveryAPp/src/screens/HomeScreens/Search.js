@@ -6,7 +6,7 @@ import { Screen } from "../../components/layout/Screen";
 
 import { useNavigation } from '@react-navigation/native';
 
-
+let calories_x = null
 let recipe_id = null;
 let title_x = null;
 let protein_x = null;
@@ -29,13 +29,14 @@ export function Search( {navigation} ){
   //Cisco, the logic is right here
   const handleButtonPress = () => {
     const title = `some title ${recipe_id}`; // replace with the current text information
-    navigation.navigate('Favorites', { title_x, protein_x, image_x, carb_x, fat_x });
+    navigation.navigate('Favorites', {recipe_id, calories_x, title_x, protein_x, image_x, carb_x, fat_x });
     console.log('PRESSED')
   };
 
-  const openModal = (title, protein, carb, fat, image) => {
+  const openModal = (id, calories, title, protein, carb, fat, image) => {
     // console.log('HERES ID', id)
-    // recipe_id = id
+    recipe_id = id
+    calories_x = calories
     title_x = title
     protein_x = protein
     image_x = image
@@ -150,7 +151,7 @@ export function Search( {navigation} ){
                   <Text style={[{fontSize: 16}, styles.textInfo]}>Protein: {recipe.nutrientAmounts["Protein"]} g</Text>
                   {/* a popup to replace the meals */}
                   {/* PASS IN SPECIFIC RECIPE ID FOR **FAVORITES.JS** */}
-                  <TouchableWithoutFeedback onPress={() => openModal(recipe.title, recipe.nutrientAmounts["Protein"], recipe.nutrientAmounts["Carbohydrates"],
+                  <TouchableWithoutFeedback onPress={() => openModal(recipe.id, recipe.nutrientAmounts["Calories"], recipe.title, recipe.nutrientAmounts["Protein"], recipe.nutrientAmounts["Carbohydrates"],
                   recipe.nutrientAmounts["Fat"], recipe.image)}>
                     <Text style={[{fontSize: 18, color: "#00FFFF"}]}>Favorite Meal</Text>
                   </TouchableWithoutFeedback>
