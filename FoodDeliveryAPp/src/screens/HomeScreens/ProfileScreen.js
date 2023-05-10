@@ -7,14 +7,14 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
-  Image
+  Image,
 } from "react-native";
 import { colors, parameters, title } from "../../constants/styles";
 import { Icon } from "react-native-elements/dist/icons/Icon";
 import { SCREEN_NAMES } from "../../constants/navigation";
 import { Screen } from "../../components/layout/Screen";
 import { signOut } from "firebase/auth";
-import { auth } from "../../../firebase"
+import { auth } from "../../../firebase";
 import ProfileLists from "../../components/ProfileLists";
 
 const ListItem = ({ name }) => {
@@ -24,11 +24,7 @@ const ListItem = ({ name }) => {
     </View>
   );
 };
-
-let height = null;
-
 export function ProfileScreen({ navigation, userData }) {
-  
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -37,81 +33,91 @@ export function ProfileScreen({ navigation, userData }) {
       .catch((error) => alert(error.message));
   };
 
+  let real_height = "";
+  let height = null;
 
-  height = (parseInt(userData.user_height)) / 12
-  let heightx = height.toFixed(1).toString()
-  let real_height = heightx.replace('.', "'")
-  console.log(real_height)
-
+  if (userData && userData.user_height) {
+    height = parseInt(userData.user_height) / 12;
+    let heightx = height.toFixed(1).toString();
+    real_height = heightx.replace(".", "'");
+  }
 
   return (
-      
-<View style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}></View>
       <Image
         style={styles.avatar}
         source={require("../../../assets/vecteezy_profile-icon-design-vector_5544718.jpg")}
-        
       />
-      
-      
+
       <View style={styles.body}>
-      <View style={styles.personInfo}>
+        <View style={styles.personInfo}>
+          <View>
+            {userData ? (
               <View>
-              {userData ? (
-                <View>
-                  <Text style={{fontSize:'17px', fontWeight:'light'}}>{userData.username}</Text>
-                  {/* <Text>Age: {userData.user_age}</Text> */}
-                  {/* display other user data */}
-                </View>
-              ) : (
-                <Text>Loading user data...</Text>
-              )}
-            </View>
+                <Text style={{ fontSize: "17px", fontWeight: "light" }}>
+                  {userData.username}
+                </Text>
+                {/* <Text>Age: {userData.user_age}</Text> */}
+                {/* display other user data */}
+              </View>
+            ) : (
+              <Text>Loading user data...</Text>
+            )}
           </View>
+        </View>
+
         <View style={styles.bodyContent}>
+          <>
+            {userData ? (
+              <>
+                <View style={styles.buttonContainer}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    Weight: {userData.user_weight}lbs
+                  </Text>
+                </View>
 
-          <View style={styles.buttonContainer}>
-            <Text style={{fontWeight: 'bold'}}>Weight: {userData.user_weight}lbs</Text>
-          </View>
+                <View style={styles.buttonContainer}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    Height: {real_height}
+                  </Text>
+                </View>
 
-          <View style={styles.buttonContainer}>
-            <Text style={{fontWeight: 'bold'}}>Height: {real_height}</Text>
-          </View>
+                <View style={styles.buttonContainer}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    Preference: {userData.user_preference}
+                  </Text>
+                </View>
 
-          <View style={styles.buttonContainer}>
-            <Text style={{fontWeight: 'bold'}}>Restriction(s): {userData.user_preference}</Text>
-          </View>
-
-          <View style={styles.buttonContainer}>
-            <Text style={{fontWeight: 'bold'}}>Goal: {userData.user_goal}</Text>
-          </View>
-
+                <View style={styles.buttonContainer}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    Goal: {userData.user_goal}
+                  </Text>
+                </View>
+              </>
+            ) : (
+              <Text>Loading user data...</Text>
+            )}
+          </>
           <TouchableOpacity style={styles.buttonContainerLogOut}>
-              <Button title="Logout" color="red" onPress={handleSignOut}></Button>
+            <Button title="Logout" color="red" onPress={handleSignOut}></Button>
           </TouchableOpacity>
-
-
-{/*           
+        </View>
+        {/*           
           <TouchableOpacity style={styles.buttonContainer}>
             <Text style={{fontWeight:'bold'}}>Stats</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonContainer}>
             <Text style={{fontWeight:'bold'}}>Random text soon</Text>
           </TouchableOpacity> */}
-
-
-        </View>
       </View>
     </View>
-
-    
   );
 }
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#AD40AF',
+    backgroundColor: "#AD40AF",
     height: 200,
   },
   avatar: {
@@ -119,10 +125,10 @@ const styles = StyleSheet.create({
     height: 130,
     borderRadius: 63,
     borderWidth: 4,
-    borderColor: 'white',
+    borderColor: "white",
     marginBottom: 10,
-    alignSelf: 'center',
-    position: 'absolute',
+    alignSelf: "center",
+    position: "absolute",
     marginTop: 130,
   },
   body: {
@@ -130,32 +136,32 @@ const styles = StyleSheet.create({
   },
   bodyContent: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     padding: 30,
   },
   info: {
     fontSize: 16,
-    color: '#00BFFF',
+    color: "#00BFFF",
     marginTop: 10,
   },
   buttonContainer: {
     marginTop: 10,
     height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 20,
     width: 250,
     borderRadius: 30,
-    backgroundColor: '#AD40AF',
+    backgroundColor: "#AD40AF",
   },
 
   buttonContainerLogOut: {
     marginTop: 10,
     height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 20,
     width: 250,
     borderRadius: 30,
@@ -164,21 +170,20 @@ const styles = StyleSheet.create({
   personInfo: {
     marginTop: 30,
     height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     width: 250,
     borderRadius: 30,
-    marginLeft: 71
+    marginLeft: 71,
   },
-
 
   statsInfo: {
     marginTop: 10,
     height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 20,
     width: 250,
   },
@@ -255,6 +260,4 @@ const styles = StyleSheet.create({
   //   backgroundColor: '#AD40AF',
   //   height: 200,
   // },
-
 });
-
