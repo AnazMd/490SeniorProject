@@ -50,6 +50,7 @@ export function FormFillInScreen({ navigation, route }) {
 
     if (parseInt(weight) < 0) {
       Alert.alert("Error", "Invalid Weight");
+      return false;
     }
 
     return true;
