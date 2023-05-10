@@ -9,8 +9,6 @@ import { useRoute } from '@react-navigation/native';
 
 export function Favorites(){
 
-
-
     const route = useRoute();
     const title = route.params?.title_x || '';
     const image = route.params?.image_x || '';
@@ -18,17 +16,14 @@ export function Favorites(){
     const carb = route.params?.carb_x || '';
     const fat = route.params?.fat_x || '';
 
-
-  
-
     // Maybe add an option to "clear all" ids
     return (
-        <View style={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.text}>{title}</Text>
-        <Text style={styles.text}>{protein}</Text>
-        <Text style={styles.text}>{carb}</Text>
-        <Text style={styles.text}>{fat}</Text>
 
+        <Text style={styles.text}>Fat: {fat}g</Text>
+        <Text style={styles.text}>Carbs: {carb}g</Text>
+        <Text style={styles.text}>Protein: {protein}g</Text>
       </View>
     );
     
