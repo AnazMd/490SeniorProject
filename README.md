@@ -21,8 +21,8 @@ Here are *some* features:
 * Ability to order off the ingredients on Instacart, making it easier for you to read your diet goals :smile:
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+<!-- <p align="right">(<a href="#readme-top">back to top</a>)</p>
+ -->
 
 
 ### Built With
@@ -32,8 +32,8 @@ Here are *some* features:
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 * ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+<!-- <p align="right">(<a href="#readme-top">back to top</a>)</p>
+ -->
 
 
 <!-- GETTING STARTED -->
@@ -76,8 +76,8 @@ _Below is how you set the app up on your desired IDE/code editor._
    npm start
    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+<!-- <p align="right">(<a href="#readme-top">back to top</a>)</p>
+ -->
 
 
 <!-- USAGE EXAMPLES -->
@@ -89,8 +89,8 @@ Click below to view the demo.
 
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+<!-- <p align="right">(<a href="#readme-top">back to top</a>)</p>
+ -->
 
 
 <!-- ROADMAP -->
@@ -113,8 +113,8 @@ Click below to view the demo.
 
 For any issues, problems, or concerns, please contact any of us by going to our profile pages.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+<!-- <p align="right">(<a href="#readme-top">back to top</a>)</p>
+ -->
 
 
 <!-- ACKNOWLEDGMENTS -->
