@@ -1,4 +1,4 @@
-# 490SeniorProject
+# Fitness App
 ---add image here and update youtube url when its HD---
 
 ## Table of Contents
