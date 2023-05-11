@@ -85,7 +85,7 @@ _Below is how you set the app up on your desired IDE/code editor._
 
 Click below to view the demo.
 
-[![Watch the video](https://img.youtube.com/vi/Ju3OgDplw1M/0.jpg)](https://youtu.be/Ju3OgDplw1M)
+[![Watch the video](https://img.youtube.com/vi/Ju3OgDplw1M/maxresdefault.jpg)](https://youtu.be/Ju3OgDplw1M)
 
 
 
