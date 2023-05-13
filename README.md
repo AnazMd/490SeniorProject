@@ -5,9 +5,14 @@ A year-long project that was created to inspire and help users to adhere to a he
 
 ## Table of Contents
 - [About the Project](#about-the-project)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
+  - [Project Research Paper](#project-research-paper) 
+  - [Built With](#built-with) 
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
 - [Demo](#demo)
+- [Roadmap](#roadmap)
+- [Contact](#contact)
 
 
 
@@ -24,6 +29,9 @@ Here are *some* features:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+### Project Research Paper
+
+For more detailed and thorough information about the project, how it works, its components, implementations, and design, you can view our _research paper on the project here:_ [Project_Paper.pdf](https://github.com/AnazMd/490SeniorProject/files/11470210/Project_Paper.pdf)
 
 
 ### Built With
