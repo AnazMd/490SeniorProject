@@ -33,7 +33,7 @@ Here are *some* features:
 
 <!-- For more detailed and thorough information about the project, how it works, its components, implementations, and design, you can view our _research paper on the project here:_ [Project_Paper.pdf](https://github.com/AnazMd/490SeniorProject/files/11470210/Project_Paper.pdf) -->
 
-[Open](Project_Paper.pdf){:target="_blank"}
+[Project_Paper.pdf](https://github.com/AnazMd/490SeniorProject/files/11470518/Project_Paper.pdf){:target="_blank"}
 
 
 ### Built With
