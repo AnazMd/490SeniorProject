@@ -31,7 +31,10 @@ Here are *some* features:
 
 ### Project Research Paper
 
-For more detailed and thorough information about the project, how it works, its components, implementations, and design, you can view our _research paper on the project here:_ [Project_Paper](https://drive.google.com/viewerng/viewer?embedded=true&url=https://github.com/AnazMd/490SeniorProject/files/11470518/Project_Paper.pdf){:target="_blank"}
+For more detailed and thorough information about the project, how it works, its components, implementations, and design, you can view our _research paper on the project here:_ [Project Paper](https://drive.google.com/viewerng/viewer?embedded=true&url=https://github.com/AnazMd/490SeniorProject/files/11470518/Project_Paper.pdf)
+
+
+*Note: Right-click and choose "Open Link in New Tab" to view the PDF file.*
 
 
 
